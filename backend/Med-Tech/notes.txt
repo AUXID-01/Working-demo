@@ -1,3 +1,0 @@
-Happy -> Project : SIH_Prac -> Cluster0 -> password : I6hakl1VxvOzuDk6, username -> nandu
-
-url: mongodb+srv://nandu:I6hakl1VxvOzuDk6@cluster0.x36e28o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
