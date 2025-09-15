@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template_string
 
 app = Flask(__name__)
 
@@ -87,16 +87,47 @@ def classify_symptoms(symptoms, severity, duration_days=1):
     # Fallback
     return {"category": "cat-2", "advice": "Unclassified input: Please consult a doctor for evaluation."}
 
+# Home page with simple HTML form
+@app.route("/", methods=["GET"])
+def home():
+    form_html = """
+    <h2>Symptom Checker</h2>
+    <form method="POST" action="/symptom-check">
+        <label>Symptoms (comma separated):</label><br>
+        <input type="text" name="symptoms"><br><br>
+
+        <label>Severity (1-10):</label><br>
+        <input type="number" name="severity" min="1" max="10"><br><br>
+
+        <label>Duration (days):</label><br>
+        <input type="number" name="duration_days" min="1"><br><br>
+
+        <button type="submit">Check</button>
+    </form>
+    """
+    return render_template_string(form_html)
+
 @app.route('/symptom-check', methods=['POST'])
 def symptom_check():
-    data = request.get_json()
-    symptoms = data.get('symptoms', [])
-    severity = int(data.get('severity', 5))
-    duration_days = int(data.get('duration_days', 1))
+    if request.is_json:  # API request
+        data = request.get_json()
+        symptoms = data.get('symptoms', [])
+    else:  # Form submission
+        symptoms = request.form.get("symptoms", "").split(",")
+    severity = int(request.values.get('severity', 5))
+    duration_days = int(request.values.get('duration_days', 1))
+
     result = classify_symptoms(symptoms, severity, duration_days)
+
+    # If HTML form submission → render result nicely
+    if not request.is_json:
+        return render_template_string(f"""
+        <h3>Result</h3>
+        <p><b>Category:</b> {result['category']}</p>
+        <p><b>Advice:</b> {result['advice']}</p>
+        <a href="/">Go Back</a>
+        """)
     return jsonify(result)
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
