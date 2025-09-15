@@ -27,14 +27,14 @@ function Login() {
                 <span className="icon">
                   <img src={emailIcon} alt="Email Icon" />
                 </span>
-                <input type="email" placeholder="E-mail" />
+                <input type="email" name="email" placeholder="E-mail" />
               </div>
 
               <div className="input-group">
                 <span className="icon">
                   <img src={lockIcon} alt="Password Icon" />
                 </span>
-                <input type="password" placeholder="Password" />
+                <input type="password" name="password" placeholder="Password" />
               </div>
 
               <div className="login-options">

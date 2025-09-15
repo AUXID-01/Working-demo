@@ -34,19 +34,19 @@ function Register() {
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <img src={userIcon} alt="User Icon" />
-              <input type="text" placeholder="Username" required />
+              <input type="text" placeholder="Username" name= "username" required />
             </div>
             <div className="input-group">
               <img src={emailIcon} alt="Email Icon" />
-              <input type="email" placeholder="E-mail" required />
+              <input type="email" name="email" placeholder="E-mail" required />
             </div>
             <div className="input-group">
               <img src={LockIcon} alt="Lock Icon" />
-              <input type="password" placeholder="Enter Password" required />
+              <input type="password" name="password" placeholder="Enter Password" required />
             </div>
             <div className="input-group">
               <img src={LockIcon} alt="Lock Icon" />
-              <input type="password" placeholder="Confirm Password" required />
+              <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
             </div>
 
             <div className="terms">

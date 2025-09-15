@@ -10,9 +10,9 @@ function PersonalDetails() {
   const [details, setDetails] = useState({
     firstName: '',
     lastName: '',
-    dob: '',
-    phone: '',
-    role: 'Patient',
+    dateOfBirth: '',
+    phoneNumber: '',
+    role: 'patient',
   })
 
   const handleChange = (e) => {
@@ -77,8 +77,8 @@ function PersonalDetails() {
               <img src={dobIcon} alt="Date of Birth Icon" />
               <input
                 type="date"
-                name="dob"
-                value={details.dob}
+                name="dateOfBirth"
+                value={details.dateOfBirth}
                 onChange={handleChange}
                 required
               />
@@ -88,9 +88,9 @@ function PersonalDetails() {
               <img src={phoneIcon} alt="Phone Icon" />
               <input
                 type="tel"
-                name="phone"
+                name="phoneNumber"
                 placeholder="Phone Number"
-                value={details.phone}
+                value={details.phoneNumber}
                 onChange={handleChange}
                 required
               />
@@ -104,7 +104,7 @@ function PersonalDetails() {
                   type="radio"
                   name="role"
                   value="Patient"
-                  checked={details.role === 'Patient'}
+                  checked={details.role === 'patient'}
                   onChange={handleChange}
                 />
                 Patient
@@ -114,7 +114,7 @@ function PersonalDetails() {
                   type="radio"
                   name="role"
                   value="Doctor"
-                  checked={details.role === 'Doctor'}
+                  checked={details.role === 'doctor'}
                   onChange={handleChange}
                 />
                 Doctor
@@ -124,7 +124,7 @@ function PersonalDetails() {
                   type="radio"
                   name="role"
                   value="Admin"
-                  checked={details.role === 'Admin'}
+                  checked={details.role === 'admin'}
                   onChange={handleChange}
                 />
                 Admin
