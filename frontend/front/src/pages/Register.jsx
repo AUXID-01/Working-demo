@@ -53,7 +53,6 @@ function Register() {
           <form onSubmit={handleSubmit}>
             <div className="input-group">
               <img src={userIcon} alt="User Icon" />
-<<<<<<< HEAD
               <input
                 type="text"
                 placeholder="Username"
@@ -91,21 +90,6 @@ function Register() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
               />
-=======
-              <input type="text" placeholder="Username" name= "username" required />
-            </div>
-            <div className="input-group">
-              <img src={emailIcon} alt="Email Icon" />
-              <input type="email" name="email" placeholder="E-mail" required />
-            </div>
-            <div className="input-group">
-              <img src={LockIcon} alt="Lock Icon" />
-              <input type="password" name="password" placeholder="Enter Password" required />
-            </div>
-            <div className="input-group">
-              <img src={LockIcon} alt="Lock Icon" />
-              <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
->>>>>>> 6ffdd0e53526396d03e2af96897687f2dab6a002
             </div>
 
             {error && <p className="error-text">{error}</p>}
