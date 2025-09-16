@@ -8,6 +8,16 @@ import loginBg from '../assets/pd.svg'
 
 function Register() {
   const navigate = useNavigate()
+<<<<<<< HEAD
+=======
+
+  // 🔹 State for form fields
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [error, setError] = useState(null)
+>>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
 
   // 🔹 State for form fields
   const [username, setUsername] = useState('')
@@ -18,11 +28,17 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+<<<<<<< HEAD
+=======
+
+    // ✅ Simple validation
+>>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
     if (password !== confirmPassword) {
       setError("Passwords don't match")
       return
     }
 
+<<<<<<< HEAD
     // Log the payload before sending
     console.log("Registering with:", { Username: username, email, password })
 
@@ -56,6 +72,16 @@ function Register() {
     } catch (err) {
       setError('Registration failed. Try again.')
     }
+=======
+    // (Optional) send data to backend here
+    console.log('Registering:', { username, email, password })
+
+    // Clear error if all good
+    setError(null)
+
+    // ✅ redirect to PersonalDetails page
+    navigate('/personal-details')
+>>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
   }
 
   return (
