@@ -46,24 +46,32 @@ function Login() {
                 <span className="icon">
                   <img src={emailIcon} alt="Email Icon" />
                 </span>
+<<<<<<< HEAD
                 <input
                   type="email"
                   placeholder="E-mail"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
+=======
+                <input type="email" name="email" placeholder="E-mail" />
+>>>>>>> 6ffdd0e53526396d03e2af96897687f2dab6a002
               </div>
 
               <div className="input-group">
                 <span className="icon">
                   <img src={lockIcon} alt="Password Icon" />
                 </span>
+<<<<<<< HEAD
                 <input
                   type="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+=======
+                <input type="password" name="password" placeholder="Password" />
+>>>>>>> 6ffdd0e53526396d03e2af96897687f2dab6a002
               </div>
 
               {error && <p className="error-text">{error}</p>}
