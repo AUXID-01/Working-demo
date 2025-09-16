@@ -1,10 +1,42 @@
-import React from 'react'
-import '../page-css/Login.css' // custom styles
+// Login.jsx
+import React, { useState } from 'react'
+import '../page-css/Login.css'
 import emailIcon from '../assets/mark_email_unread.png'
 import lockIcon from '../assets/Lock.png'
 import loginBg from '../assets/signbg.svg'
 
 function Login() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(null)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!email || !password) {
+      setError('Please fill in both fields.')
+      return
+    }
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      })
+      const data = await response.json()
+      if (!response.ok) {
+        setError(data.message)
+        return
+      }
+      setError(null)
+      // Store token for authenticated routes
+      localStorage.setItem('token', data.token)
+      // Redirect after login
+      window.location.href = '/dashboard'
+    } catch (err) {
+      setError('Login failed. Try again.')
+    }
+  }
+
   return (
     <div
       className="page-background"
@@ -16,26 +48,39 @@ function Login() {
       }}
     >
       <div className="login-container">
-        {/* Left side with card */}
         <div className="login-left">
           <div className="login-card">
             <h2 className="login-title">Hello!</h2>
-            <p className="login-subtitle">Sign in to you your account</p>
+            <p className="login-subtitle">Sign in to your account</p>
 
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="input-group">
                 <span className="icon">
                   <img src={emailIcon} alt="Email Icon" />
                 </span>
-                <input type="email" placeholder="E-mail" />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="E-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
 
               <div className="input-group">
                 <span className="icon">
                   <img src={lockIcon} alt="Password Icon" />
                 </span>
-                <input type="password" placeholder="Password" />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
+
+              {error && <p className="error-text">{error}</p>}
 
               <div className="login-options">
                 <a href="/" className="forgot-password">
@@ -54,7 +99,6 @@ function Login() {
           </div>
         </div>
 
-        {/* Right side message */}
         <div className="login-right">
           <h2 className="welcome-title">Welcome Back!</h2>
           <p className="welcome-text">
@@ -68,3 +112,4 @@ function Login() {
 }
 
 export default Login
+

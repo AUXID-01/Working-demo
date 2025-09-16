@@ -1,8 +1,8 @@
 .dashboard-container {
   display: flex;
   height: 100vh;
-  width:100vw;
-  font-family: "Poppins", sans-serif;
+  width: 100vw;
+  font-family: 'Poppins', sans-serif;
 }
 
 .sidebar {
@@ -51,8 +51,9 @@
   text-decoration: none;
   transition: 0.2s;
 }
-.menu a:hover, .menu a.active {
-  background: #16685E;
+.menu a:hover,
+.menu a.active {
+  background: #16685e;
   color: white;
 }
 
@@ -90,30 +91,81 @@
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1rem;
 }
+
 .card {
   background: #fff;
   padding: 1rem;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  color: #222b45;
 }
+
 .card h3 {
   margin-bottom: 0.6rem;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #16685e;
 }
+
+.card p,
+.card ul {
+  margin-top: 0.2rem;
+  color: #555;
+}
+
+.card ul {
+  padding-left: 1rem;
+}
+
+.card.appointments {
+  border-left: 5px solid #16685e;
+  background: #eaf4f2;
+}
+
+.card.medicine {
+  border-left: 5px solid #417d7a;
+  background: #f0f7f6;
+}
+
 .card .btn {
-  background: #16685E;
+  background: #16685e;
   color: #fff;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
   border-radius: 20px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
+
 .card .btn:hover {
   background: #0d4c42;
 }
+
 .chart-placeholder {
   font-size: 2rem;
   text-align: center;
   margin-top: 0.5rem;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #16685e;
+}
+.dashboard-title {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #16685e;
+}
+
+.profile-name {
+  font-weight: 600;
+  color: #16685e;
+  margin: 0;
+}
+.profile-email {
+  color: #444;
 }

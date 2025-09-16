@@ -1,12 +1,19 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import cors from 'cors';
+
 dotenv.config()
 
 import authRouter from './src/routes/auth.routes.js'
 import userRouter from './src/routes/user.routes.js';
 
 const app = express()
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
+
 const PORT = process.env.PORT ;
 
 //middleware
