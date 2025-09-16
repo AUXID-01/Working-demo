@@ -16,7 +16,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     // ✅ Simple validation
@@ -25,14 +25,39 @@ function Register() {
       return
     }
 
-    // (Optional) send data to backend here
-    console.log('Registering:', { username, email, password })
+    // Log the payload before sending
+    console.log("Registering with:", { Username: username, email, password })
 
-    // Clear error if all good
-    setError(null)
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          Username: username,
+          email,
+          password,
+          // Optionally add 'role' if needed
+        }),
+      })
 
-    // ✅ redirect to PersonalDetails page
-    navigate('/personal-details')
+      const data = await response.json()
+
+      if (!response.ok) {
+        if (data.errors) {
+          // Show all validation error messages from backend
+          setError(data.errors.map(err => err.msg).join(', '))
+        } else {
+          setError(data.message || 'Registration error')
+        }
+        return
+      }
+
+      setError(null)
+      // On success: navigate or show success message
+      navigate('/personal-details')
+    } catch (err) {
+      setError('Registration failed. Try again.')
+    }
   }
 
   return (

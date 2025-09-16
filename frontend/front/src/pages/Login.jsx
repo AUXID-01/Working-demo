@@ -11,18 +11,32 @@ function Login() {
   const [error, setError] = useState(null)
 
   // 🔹 Form submit handling
-  const handleSubmit = (e) => {
-    e.preventDefault() // prevent refresh
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
     if (!email || !password) {
       setError('Please fill in both fields.')
       return
     }
-
-    // Call API / Auth logic here
-    console.log('Logging in with:', { email, password })
-
-    // Reset error
-    setError(null)
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      })
+      const data = await response.json()
+      if (!response.ok) {
+        setError(data.message)
+        return
+      }
+      setError(null)
+      // Store token for authenticated routes
+      localStorage.setItem('token', data.token)
+      // Redirect after login
+      window.location.href = '/dashboard'
+    } catch (err) {
+      setError('Login failed. Try again.')
+    }
   }
 
   return (
@@ -46,32 +60,30 @@ function Login() {
                 <span className="icon">
                   <img src={emailIcon} alt="Email Icon" />
                 </span>
-<<<<<<< HEAD
+
                 <input
                   type="email"
+                  name="email"
                   placeholder="E-mail"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
-=======
-                <input type="email" name="email" placeholder="E-mail" />
->>>>>>> 6ffdd0e53526396d03e2af96897687f2dab6a002
               </div>
 
               <div className="input-group">
                 <span className="icon">
                   <img src={lockIcon} alt="Password Icon" />
                 </span>
-<<<<<<< HEAD
+
                 <input
                   type="password"
+                  name="password"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
-=======
-                <input type="password" name="password" placeholder="Password" />
->>>>>>> 6ffdd0e53526396d03e2af96897687f2dab6a002
               </div>
 
               {error && <p className="error-text">{error}</p>}

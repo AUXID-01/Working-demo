@@ -1,0 +1,58 @@
+# Node modules and build output
+backend/node_modules/
+frontend/node_modules/
+devops/node_modules/
+
+# Build and cache directories
+frontend/build/
+backend/dist/
+backend/build/
+ai-ml/__pycache__/
+ai-ml/.pytest_cache/
+ai-ml/.venv/
+ai-ml/venv/
+devops/.venv/
+devops/venv/
+devops/.mypy_cache/
+devops/__pycache__/
+
+# Environment variables and local configs
+*.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Python virtualenvs
+venv/
+ENV/
+env/
+.ai-ml/venv/
+
+# Python bytecode and logs
+*.pyc
+*.pyo
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+*.swp
+
+# Build artifacts and coverage
+coverage/
+*.coverage
+*.egg-info/
+dist/
+build/
+*.so
+
+# Misc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*

@@ -1,5 +1,5 @@
 // Dashboard.jsx
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   FaCalendarAlt,
   FaUserMd,
@@ -17,6 +17,36 @@ import {
 import '../page-css/Dashboard.css'
 
 function Dashboard() {
+  const [user, setUser] = useState(null)
+  const token = localStorage.getItem('token')
+
+  useEffect(() => {
+    if (!token) {
+      window.location.href = '/login'
+      return
+    }
+
+    fetch('http://localhost:5000/api/user/me', {
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message) {
+          localStorage.removeItem('token')
+          window.location.href = '/login'
+        } else {
+          setUser(data)
+        }
+      })
+      .catch(() => {
+        localStorage.removeItem('token')
+        window.location.href = '/login'
+      })
+  }, [token])
+
   return (
     <div className="dashboard-container">
       {/* Sidebar */}
@@ -70,8 +100,8 @@ function Dashboard() {
             className="avatar"
           />
           <div>
-            <p>Bismillah Sharma</p>
-            <small>bismillahsharma@gmail.com</small>
+            <p className="profile-name">{user?.Username || "Bismillah Sharma"}</p>
+            <small className="profile-email">{user?.email || "bismillahsharma@gmail.com"}</small>
           </div>
         </div>
       </aside>
@@ -79,7 +109,7 @@ function Dashboard() {
       {/* Main Content */}
       <main className="main">
         <header className="header">
-          <h2>Patient Dashboard</h2>
+          <h2 className="dashboard-title">Patient Dashboard</h2>
           <div className="header-icons">
             <FaBell />
             <FaCog />
@@ -87,14 +117,21 @@ function Dashboard() {
         </header>
 
         <section className="cards">
-          <div className="card">
-            <h3>Upcoming Appointments</h3>
+          <div className="card appointments">
+            <h3>
+              <FaCalendarCheck style={{ color: '#16685e', marginRight: '8px' }} />
+              Upcoming Appointments
+            </h3>
             <p>No Upcoming Appointments</p>
           </div>
 
-          <div className="card">
-            <h3>Medicine Availability</h3>
+          <div className="card medicine">
+            <h3>
+              <FaPills style={{ color: '#16685e', marginRight: '8px' }} />
+              Medicine Availability
+            </h3>
             <p>📍 Pharmacy Nearby</p>
+<<<<<<< HEAD
 
             <button
               onClick={() => {
@@ -120,10 +157,18 @@ function Dashboard() {
             >
               Go to Maps
             </button>
+=======
+            <a href="#" style={{ color: '#16685e', textDecoration: 'underline' }}>
+              Go to Maps
+            </a>
+>>>>>>> 293d0b060a4075f31178d23dfeb6caa86563effe
           </div>
 
-          <div className="card">
-            <h3>Recent Health Records</h3>
+          <div className="card records">
+            <h3>
+              <FaFileMedical style={{ color: '#16685e', marginRight: '8px' }} />
+              Recent Health Records
+            </h3>
             <p>
               Last visited on <b>20 September</b>
             </p>
@@ -131,22 +176,31 @@ function Dashboard() {
             <div className="chart-placeholder">📈</div>
           </div>
 
-          <div className="card">
-            <h3>Reminders</h3>
+          <div className="card reminders">
+            <h3>
+              <FaBell style={{ color: '#16685e', marginRight: '8px' }} />
+              Reminders
+            </h3>
             <ul>
               <li>Take BP medicine at 8pm.</li>
               <li>Show up for appointment tomorrow.</li>
             </ul>
           </div>
 
-          <div className="card">
-            <h3>Symptom Checker</h3>
+          <div className="card symptom-checker">
+            <h3>
+              <FaHeartbeat style={{ color: '#fd5a5a', marginRight: '8px' }} />
+              Symptom Checker
+            </h3>
             <p>Your health matters</p>
             <button className="btn">Start</button>
           </div>
 
-          <div className="card">
-            <h3>Quick Actions</h3>
+          <div className="card quick-actions">
+            <h3>
+              <FaCalendarAlt style={{ color: '#16685e', marginRight: '8px' }} />
+              Quick Actions
+            </h3>
             <ul>
               <li>⭕ Book Appointment</li>
               <li>📤 Upload Report</li>
