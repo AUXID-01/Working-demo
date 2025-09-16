@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// Login.jsx
-=======
->>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
 import React, { useState } from 'react'
 import '../page-css/Login.css'
 import emailIcon from '../assets/mark_email_unread.png'
@@ -9,27 +5,19 @@ import lockIcon from '../assets/Lock.png'
 import loginBg from '../assets/signbg.svg'
 
 function Login() {
-<<<<<<< HEAD
-=======
   // 🔹 State handling
->>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
 
-<<<<<<< HEAD
+  // 🔹 Form submit handling
   const handleSubmit = async (e) => {
     e.preventDefault()
-=======
-  // 🔹 Form submit handling
-  const handleSubmit = (e) => {
-    e.preventDefault() // prevent refresh
->>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
+
     if (!email || !password) {
       setError('Please fill in both fields.')
       return
     }
-<<<<<<< HEAD
     try {
       const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
@@ -49,14 +37,6 @@ function Login() {
     } catch (err) {
       setError('Login failed. Try again.')
     }
-=======
-
-    // Call API / Auth logic here
-    console.log('Logging in with:', { email, password })
-
-    // Reset error
-    setError(null)
->>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
   }
 
   return (
@@ -80,50 +60,30 @@ function Login() {
                 <span className="icon">
                   <img src={emailIcon} alt="Email Icon" />
                 </span>
-<<<<<<< HEAD
+
                 <input
                   type="email"
                   name="email"
-=======
-<<<<<<< HEAD
-                <input
-                  type="email"
->>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
                   placeholder="E-mail"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
-<<<<<<< HEAD
-=======
-=======
-                <input type="email" name="email" placeholder="E-mail" />
->>>>>>> 6ffdd0e53526396d03e2af96897687f2dab6a002
->>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
               </div>
 
               <div className="input-group">
                 <span className="icon">
                   <img src={lockIcon} alt="Password Icon" />
                 </span>
-<<<<<<< HEAD
+
                 <input
                   type="password"
                   name="password"
-=======
-<<<<<<< HEAD
-                <input
-                  type="password"
->>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
-<<<<<<< HEAD
-=======
-=======
-                <input type="password" name="password" placeholder="Password" />
->>>>>>> 6ffdd0e53526396d03e2af96897687f2dab6a002
->>>>>>> d9e59786dbb8d37e467073c1677f0b7d70c6e907
               </div>
 
               {error && <p className="error-text">{error}</p>}
@@ -158,4 +118,3 @@ function Login() {
 }
 
 export default Login
-

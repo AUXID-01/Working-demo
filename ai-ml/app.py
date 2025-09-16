@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template_string
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:5173", "http://localhost:5174"])
 
 CATEGORY_RULES = {
     "cat-4": {
