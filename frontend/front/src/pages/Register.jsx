@@ -33,19 +33,21 @@ function Register() {
       const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ Username: username, email, password }),
+        body: JSON.stringify({ username, email, password }),
       })
 
       const data = await response.json()
+      console.log('Register response:', response.status, data) // 👀 Debug log
 
       if (!response.ok) {
-        setError(data.message || 'Registration error')
+        setError(data.message || data.error || 'Registration error')
         return
       }
 
       setError(null)
       navigate('/personal-details')
     } catch (err) {
+      console.error('Register error:', err)
       setError('Registration failed. Try again.')
     }
   }
@@ -126,8 +128,10 @@ function Register() {
               />
             </div>
 
+            {/* Error Message */}
             {error && <p className="error-text">{error}</p>}
 
+            {/* Terms */}
             <div className="terms">
               <input type="checkbox" id="terms" required />
               <label htmlFor="terms">I agree to the Terms & conditions</label>
