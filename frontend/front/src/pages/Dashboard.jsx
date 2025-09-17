@@ -131,9 +131,37 @@ function Dashboard() {
               Medicine Availability
             </h3>
             <p>📍 Pharmacy Nearby</p>
+<<<<<<< HEAD
+
+            <button
+              onClick={() => {
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition((position) => {
+                    const { latitude, longitude } = position.coords
+                    const mapsUrl = `https://www.google.com/maps/search/open+pharmacy/@${latitude},${longitude},15z`
+                    window.open(mapsUrl, '_blank')
+                  })
+                } else {
+                  alert('Geolocation is not supported by your browser.')
+                }
+              }}
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                color: 'blue',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                padding: 0,
+                fontSize: 'inherit',
+              }}
+            >
+              Go to Maps
+            </button>
+=======
             <a href="#" style={{ color: '#16685e', textDecoration: 'underline' }}>
               Go to Maps
             </a>
+>>>>>>> 293d0b060a4075f31178d23dfeb6caa86563effe
           </div>
 
           <div className="card records">
