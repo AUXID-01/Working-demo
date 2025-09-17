@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ../frontend/front
+    container_name: frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    networks:
+      - myapp_net
+
+  backend:
+    build: ../backend/Med-Tech
+    container_name: backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    networks:
+      - myapp_net
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - myapp_net
+
+networks:
+  myapp_net:
+    driver: bridge
