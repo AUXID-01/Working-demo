@@ -216,3 +216,45 @@ input::placeholder {
     margin-bottom: 2rem;
   }
 }
+
+@media (max-width: 1024px) {
+  .login-card {
+    left: 0;
+    width: 100%;
+    max-width: 400px;
+  }
+  .welcome-title {
+    font-size: 2.2rem;
+  }
+  .welcome-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .login-right {
+    padding: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 1.5rem;
+    width: 100%;
+  }
+  .login-title {
+    font-size: 1.6rem;
+  }
+  .login-subtitle {
+    font-size: 1rem;
+  }
+  .btn-login {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+}

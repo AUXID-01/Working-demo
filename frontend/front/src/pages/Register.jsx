@@ -4,56 +4,46 @@ import '../page-css/Register.css'
 import emailIcon from '../assets/mark_email_unread.png'
 import LockIcon from '../assets/Lock.png'
 import userIcon from '../assets/User.png'
+import eyeOpen from '../assets/eye-open.png' // 👁️ open eye icon
+import eyeClosed from '../assets/eye-closed.png' // 👁️ closed eye icon
 import loginBg from '../assets/pd.svg'
 
 function Register() {
   const navigate = useNavigate()
 
-  // 🔹 State for form fields
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState(null)
 
+  // 👁️ Track visibility
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // ✅ Simple validation
     if (password !== confirmPassword) {
       setError("Passwords don't match")
       return
     }
 
-    // Log the payload before sending
-    console.log("Registering with:", { Username: username, email, password })
-
     try {
       const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          Username: username,
-          email,
-          password,
-          // Optionally add 'role' if needed
-        }),
+        body: JSON.stringify({ Username: username, email, password }),
       })
 
       const data = await response.json()
 
       if (!response.ok) {
-        if (data.errors) {
-          // Show all validation error messages from backend
-          setError(data.errors.map(err => err.msg).join(', '))
-        } else {
-          setError(data.message || 'Registration error')
-        }
+        setError(data.message || 'Registration error')
         return
       }
 
       setError(null)
-      // On success: navigate or show success message
       navigate('/personal-details')
     } catch (err) {
       setError('Registration failed. Try again.')
@@ -76,6 +66,7 @@ function Register() {
           <p className="register-subtitle">Create your account</p>
 
           <form onSubmit={handleSubmit}>
+            {/* Username */}
             <div className="input-group">
               <img src={userIcon} alt="User Icon" />
               <input
@@ -86,6 +77,8 @@ function Register() {
                 required
               />
             </div>
+
+            {/* Email */}
             <div className="input-group">
               <img src={emailIcon} alt="Email Icon" />
               <input
@@ -96,24 +89,40 @@ function Register() {
                 required
               />
             </div>
-            <div className="input-group">
+
+            {/* Password */}
+            <div className="input-group password-group">
               <img src={LockIcon} alt="Lock Icon" />
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Enter Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              <img
+                src={showPassword ? eyeOpen : eyeClosed}
+                alt="Toggle Password"
+                className="eye-icon"
+                onClick={() => setShowPassword(!showPassword)}
+              />
             </div>
-            <div className="input-group">
+
+            {/* Confirm Password */}
+            <div className="input-group password-group">
               <img src={LockIcon} alt="Lock Icon" />
               <input
-                type="password"
+                type={showConfirmPassword ? 'text' : 'password'}
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
+              />
+              <img
+                src={showConfirmPassword ? eyeOpen : eyeClosed}
+                alt="Toggle Confirm Password"
+                className="eye-icon"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               />
             </div>
 
