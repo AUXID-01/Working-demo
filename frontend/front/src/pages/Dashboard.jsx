@@ -131,7 +131,7 @@ function Dashboard() {
               Medicine Availability
             </h3>
             <p>📍 Pharmacy Nearby</p>
-<<<<<<< HEAD
+
 
             <button
               onClick={() => {
@@ -157,11 +157,11 @@ function Dashboard() {
             >
               Go to Maps
             </button>
-=======
+
             <a href="#" style={{ color: '#16685e', textDecoration: 'underline' }}>
               Go to Maps
             </a>
->>>>>>> 293d0b060a4075f31178d23dfeb6caa86563effe
+
           </div>
 
           <div className="card records">
