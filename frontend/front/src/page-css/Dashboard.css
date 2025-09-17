@@ -216,3 +216,13 @@
     padding: 1rem;
   }
 }
+
+.map-btn {
+  background-color: transparent;
+  border: none;
+  color: #16685e;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-size: inherit;
+}

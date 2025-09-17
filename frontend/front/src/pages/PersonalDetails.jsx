@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import '../page-css/Register.css' // reuse same css
 import userIcon from '../assets/User.png'
-import dobIcon from '../assets/Calendar.png' // add a calendar icon in assets
-import phoneIcon from '../assets/Phone.png' // add a phone icon in assets
+import dobIcon from '../assets/Calendar.png' // calendar icon
+import phoneIcon from '../assets/Phone.png' // phone icon
 import loginBg from '../assets/pd.svg'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 function PersonalDetails() {
   const [details, setDetails] = useState({
@@ -12,8 +12,10 @@ function PersonalDetails() {
     lastName: '',
     dateOfBirth: '',
     phoneNumber: '',
-    role: 'patient',
+    role: 'patient', // ✅ default role
   })
+
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -23,14 +25,8 @@ function PersonalDetails() {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log('Personal details submitted:', details)
-    // navigate or API call here
-  }
-
-  const navigate = useNavigate()
-
-  const handleContinue = (e) => {
-    e.preventDefault() // stop form refresh if inside a <form>
-    navigate('/dashboard') // go to dashboard
+    // 👉 Here you can call an API to save details before navigation
+    navigate('/dashboard')
   }
 
   return (
@@ -49,6 +45,7 @@ function PersonalDetails() {
           <p className="register-subtitle">Enter your details</p>
 
           <form onSubmit={handleSubmit}>
+            {/* First Name */}
             <div className="input-group">
               <img src={userIcon} alt="First Name Icon" />
               <input
@@ -61,6 +58,7 @@ function PersonalDetails() {
               />
             </div>
 
+            {/* Last Name */}
             <div className="input-group">
               <img src={userIcon} alt="Last Name Icon" />
               <input
@@ -73,6 +71,7 @@ function PersonalDetails() {
               />
             </div>
 
+            {/* Date of Birth */}
             <div className="input-group">
               <img src={dobIcon} alt="Date of Birth Icon" />
               <input
@@ -84,6 +83,7 @@ function PersonalDetails() {
               />
             </div>
 
+            {/* Phone Number */}
             <div className="input-group">
               <img src={phoneIcon} alt="Phone Icon" />
               <input
@@ -103,7 +103,7 @@ function PersonalDetails() {
                 <input
                   type="radio"
                   name="role"
-                  value="Patient"
+                  value="patient"
                   checked={details.role === 'patient'}
                   onChange={handleChange}
                 />
@@ -113,7 +113,7 @@ function PersonalDetails() {
                 <input
                   type="radio"
                   name="role"
-                  value="Doctor"
+                  value="doctor"
                   checked={details.role === 'doctor'}
                   onChange={handleChange}
                 />
@@ -123,7 +123,7 @@ function PersonalDetails() {
                 <input
                   type="radio"
                   name="role"
-                  value="Admin"
+                  value="admin"
                   checked={details.role === 'admin'}
                   onChange={handleChange}
                 />
@@ -131,7 +131,7 @@ function PersonalDetails() {
               </label>
             </div>
 
-            <button type="submit" className="btn-register" onClick={handleContinue} >
+            <button type="submit" className="btn-register">
               Continue
             </button>
           </form>

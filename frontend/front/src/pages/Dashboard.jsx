@@ -14,6 +14,7 @@ import {
   FaSearch,
   FaCog,
 } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 import '../page-css/Dashboard.css'
 
 function Dashboard() {
@@ -58,39 +59,39 @@ function Dashboard() {
         </div>
 
         <nav className="menu">
-          <a className="active">
+          <Link to="/dashboard" className="active">
             <FaCalendarAlt /> Dashboard
-          </a>
-          <a>
+          </Link>
+          <Link to="/appointments">
             <FaCalendarCheck /> Appointments
-          </a>
-          <a>
+          </Link>
+          <Link to="/doctors">
             <FaUserMd /> Doctors
-          </a>
-          <a>
+          </Link>
+          <Link to="/medicines">
             <FaPills /> Medicines
-          </a>
-          <a>
+          </Link>
+          <Link to="/records">
             <FaFileMedical /> Records
-          </a>
-          <a>
+          </Link>
+          <Link to="/reminders">
             <FaBell /> Reminders
-          </a>
-          <a>
+          </Link>
+          <Link to="/messages">
             <FaEnvelope /> Messages
-          </a>
-          <a>
+          </Link>
+          <Link to="/payments">
             <FaCreditCard /> Payments
-          </a>
-          <a>
+          </Link>
+          <Link to="/symptom-checker">
             <FaHeartbeat /> Symptom Checker
-          </a>
-          <a>
+          </Link>
+          <Link to="/book-appointment">
             <FaCalendarCheck /> Book Appointment
-          </a>
-          <a>
+          </Link>
+          <Link to="/emergency">
             <FaAmbulance /> Emergency
-          </a>
+          </Link>
         </nav>
 
         <div className="profile">
@@ -100,8 +101,12 @@ function Dashboard() {
             className="avatar"
           />
           <div>
-            <p className="profile-name">{user?.Username || "Bismillah Sharma"}</p>
-            <small className="profile-email">{user?.email || "bismillahsharma@gmail.com"}</small>
+            <p className="profile-name">
+              {user?.Username || 'Bismillah Sharma'}
+            </p>
+            <small className="profile-email">
+              {user?.email || 'bismillahsharma@gmail.com'}
+            </small>
           </div>
         </div>
       </aside>
@@ -119,7 +124,9 @@ function Dashboard() {
         <section className="cards">
           <div className="card appointments">
             <h3>
-              <FaCalendarCheck style={{ color: '#16685e', marginRight: '8px' }} />
+              <FaCalendarCheck
+                style={{ color: '#16685e', marginRight: '8px' }}
+              />
               Upcoming Appointments
             </h3>
             <p>No Upcoming Appointments</p>
@@ -132,36 +139,27 @@ function Dashboard() {
             </h3>
             <p>📍 Pharmacy Nearby</p>
 
-
             <button
               onClick={() => {
                 if (navigator.geolocation) {
-                  navigator.geolocation.getCurrentPosition((position) => {
-                    const { latitude, longitude } = position.coords
-                    const mapsUrl = `https://www.google.com/maps/search/open+pharmacy/@${latitude},${longitude},15z`
-                    window.open(mapsUrl, '_blank')
-                  })
+                  navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                      const { latitude, longitude } = position.coords
+                      const mapsUrl = `https://www.google.com/maps/search/open+pharmacy/@${latitude},${longitude},15z`
+                      window.open(mapsUrl, '_blank')
+                    },
+                    () => {
+                      alert('Unable to fetch location. Please enable GPS.')
+                    }
+                  )
                 } else {
                   alert('Geolocation is not supported by your browser.')
                 }
               }}
-              style={{
-                backgroundColor: 'transparent',
-                border: 'none',
-                color: 'blue',
-                cursor: 'pointer',
-                textDecoration: 'underline',
-                padding: 0,
-                fontSize: 'inherit',
-              }}
+              className="map-btn"
             >
-              Go to Maps
+              Find Pharmacies Near Me
             </button>
-
-            <a href="#" style={{ color: '#16685e', textDecoration: 'underline' }}>
-              Go to Maps
-            </a>
-
           </div>
 
           <div className="card records">
