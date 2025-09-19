@@ -1,0 +1,98 @@
+.medicines-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.medicine-card {
+  background: #f6fcff; /* same light feel as message cards */
+  border-radius: 10px;
+  padding: 14px 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.medicine-card:hover {
+  background: #eef9f8;
+}
+
+.medicine-info strong {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.medicine-info p {
+  margin: 2px 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.medicine-info .doctor {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.status-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-badge.active {
+  background: #e6f4f2;
+  color: #16685e;
+}
+
+.status-badge.completed {
+  background: #f0f0f0;
+  color: #555;
+}
+
+.medicine-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  background: #16685e;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: #11524b;
+}
+
+.btn-outline {
+  background: #fff;
+  border: 1px solid #16685e;
+  color: #16685e;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: #16685e;
+  color: #fff;
+}
+
+.no-actions {
+  color: #aaa;
+  font-size: 0.9rem;
+}

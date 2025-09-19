@@ -1,0 +1,69 @@
+/* Center the profile page */
+.profile-page {
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin: 2rem auto;       /* center horizontally */
+  max-width: 500px;        /* prevent it from being too wide */
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Title */
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 1.5rem;
+  text-align: center; /* center title */
+}
+
+/* Profile info section */
+.profile-info {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.label {
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.value {
+  color: #2d3748;
+}
+
+/* Buttons */
+.profile-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center; /* center buttons under profile */
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+  background: #16a34a; /* green theme */
+  color: #fff;
+}
+
+.btn:hover {
+  background: #15803d; /* darker green on hover */
+}

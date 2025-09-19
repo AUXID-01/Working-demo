@@ -1,0 +1,179 @@
+/* ----------------- Form ----------------- */
+.reminder-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.reminder-form input {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #000;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reminder-form input:focus {
+  border-color: #16685E;
+  box-shadow: 0 0 4px rgba(22, 104, 94, 0.4);
+  outline: none;
+}
+
+.reminder-form .btn.add {
+  padding: 10px 20px;
+  background-color: #16685E;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.reminder-form .btn.add:hover {
+  background-color: #11524b;
+}
+
+/* ----------------- Filters ----------------- */
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filter-buttons button {
+  padding: 6px 14px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: #f8f8f8;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.filter-buttons button.active {
+  background: #16685E;
+  color: white;
+  border-color: #16685E;
+}
+
+/* ----------------- Reminder List ----------------- */
+.reminder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-title {
+  margin: 20px 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #16685E;
+}
+
+.reminder-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+}
+
+.reminder-card:hover {
+  transform: translateX(4px);
+}
+
+/* ----------------- Reminder Info ----------------- */
+.reminder-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;        /* takes remaining space */
+  min-width: 0;   /* allows ellipsis to work */
+}
+
+.reminder-info .icon {
+  color: #16685E;
+  font-size: 18px;
+  flex-shrink: 0; /* icon won't shrink */
+}
+
+.reminder-info p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #16685E;
+  white-space: nowrap;       /* keep in one line */
+  overflow: hidden;          /* cut off overflow */
+  text-overflow: ellipsis;   /* add "..." */
+  max-width: 220px;          /* adjust as needed */
+}
+
+.reminder-info small {
+  display: block;
+  color: #777;
+  font-size: 12px;
+}
+
+/* ----------------- Checkmark ----------------- */
+.reminder-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #16685E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.reminder-check.done {
+  background: #16685E;
+  color: white;
+}
+
+/* ----------------- Completed Style ----------------- */
+.reminder-card.done p {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.reminder-card.done small {
+  color: #aaa;
+}
+
+/* ----------------- Delete Button ----------------- */
+/* Delete button */
+.btn.delete {
+  background: none;
+  border: none;
+  color: #d9534f;
+  font-size: 18px;       /* icon size */
+  cursor: pointer;
+  margin-left: auto;     /* push to right */
+  flex-shrink: 0;        /* don’t shrink */
+  display: flex;         
+  align-items: center;   /* center vertically */
+  justify-content: center;
+  width: 32px;           /* fixed small size */
+  height: 32px;
+  padding: 0;            /* remove extra padding */
+  border-radius: 6px;    /* optional: small hover shape */
+}
+
+.btn.delete:hover {
+  color: #b52b27;
+  background: rgba(217, 83, 79, 0.08); /* light hover bg */
+}
+

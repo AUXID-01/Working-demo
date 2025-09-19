@@ -1,0 +1,188 @@
+/* 🔍 Filters Section */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+/* Search Input */
+.search-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+  flex: 1;
+  min-width: 150px;
+  background-color: #fff;
+  color: #000;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: #16685E;
+  box-shadow: 0 0 4px rgba(22, 104, 94, 0.4);
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #666;
+}
+
+/* Specialty Dropdown */
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  color: #000;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-select:focus {
+  border-color: #16685E;
+  box-shadow: 0 0 4px rgba(22, 104, 94, 0.4);
+  outline: none;
+}
+
+/* Search Button */
+.search-btn {
+  padding: 8px 16px;
+  background-color: #16685E;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-btn:hover {
+  background-color: #11524b;
+}
+
+/* 🩺 Doctors List */
+.doctor-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* responsive grid */
+  gap: 15px;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Doctor Card */
+.doctor-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Doctor Info */
+.doctor-info h3 {
+  margin: 0 0 6px;
+  font-size: 1rem; /* smaller title */
+  font-weight: 600;
+  color: #16685e;
+}
+
+.specialization {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1e40af;
+}
+
+.hospital {
+  font-size: 0.85rem;
+  color: #444;
+  margin-bottom: 4px;
+}
+
+.availability {
+  font-size: 0.8rem;
+  color: #16685e;
+  background: #e6f4f2;
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin: 4px 0;
+}
+
+.contact {
+  font-size: 0.85rem;
+  color: #333;
+  margin: 4px 0;
+}
+
+/* ⭐ Rating */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.rating span {
+  margin-left: 4px;
+  color: #111;
+  font-weight: 500;
+}
+
+/* Buttons */
+.doctor-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+.btn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.2s ease;
+}
+
+.btn.call {
+  background: #e6f4f2;
+  color: #16685e;
+}
+
+.btn.call:hover {
+  background: #cce7e4;
+}
+
+.btn.message {
+  background: #e6f0ff;
+  color: #1e40af;
+}
+
+.btn.message:hover {
+  background: #cddaff;
+}
+
+.btn.book {
+  background: #16685e;
+  color: #fff;
+}
+
+.btn.book:hover {
+  background: #12534a;
+}

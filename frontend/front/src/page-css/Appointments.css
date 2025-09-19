@@ -1,0 +1,152 @@
+.appointments-container {
+  padding: 16px 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.appointments-container.no-top-gap {
+  margin-top: -8px; /* pull it closer to subtitle */
+}
+
+.appointments-container h2 {
+  margin-top: 4px; /* just a tiny gap */
+  margin-bottom: 12px;
+  color: #111;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.no-appointments {
+  color: #777;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+/* Appointment List */
+.appointments-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Appointment Card */
+.appointment-card {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.appointment-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Header Section */
+.appointment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.appointment-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #16685e;
+}
+
+/* Meta info (date + badge) */
+.appointment-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.appointment-date {
+  font-size: 0.85rem;
+  color: #444;
+  background: #f4f7f7;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* Mode badges */
+.mode-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: capitalize;
+}
+
+.mode-badge.in-person {
+  background: #e6f4f2;
+  color: #16685e;
+}
+
+.mode-badge.online {
+  background: #eaf0ff;
+  color: #1e40af;
+}
+
+.mode-badge.home-visit {
+  background: #fff3cd;
+  color: #856404;
+}
+
+/* Card content */
+.appointment-card p {
+  margin: 4px 0;
+  font-size: 0.88rem;
+  color: #333;
+}
+
+.appointment-card .notes {
+  margin-top: 6px;
+  font-style: italic;
+  color: #666;
+}
+
+/* Loading */
+.loading-text {
+  color: #000;
+  font-size: 1rem;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+/* Sections (Today, Tomorrow, Later) */
+.appointments-section {
+  margin-bottom: 22px;
+}
+
+.appointments-section h3 {
+  margin-bottom: 10px;
+  color: #16685e;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Join button */
+.join-btn {
+  margin-top: 10px;
+  padding: 7px 14px;
+  background: #16685e;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.join-btn:hover {
+  background: #12534a;
+}

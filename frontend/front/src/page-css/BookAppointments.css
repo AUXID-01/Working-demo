@@ -1,0 +1,75 @@
+.appointment-form {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff; /* white card */
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: #222; /* darker text */
+}
+
+/* Inputs, Selects, Textareas */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #16685E; /* theme teal */
+  box-shadow: 0 0 4px rgba(22, 104, 94, 0.3);
+}
+
+/* Textareas */
+textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+/* Button */
+.btn {
+  display: block;
+  width: 100%;
+  background-color: #16685E;
+  color: #fff;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.btn:hover {
+  background-color: #11524b;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .appointment-form {
+    padding: 18px;
+  }
+}

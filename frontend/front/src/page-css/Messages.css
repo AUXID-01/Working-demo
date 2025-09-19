@@ -1,0 +1,73 @@
+/* src/page-css/Messages.css */
+
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 10px;
+}
+
+/* Section titles (Today, Yesterday, Earlier) */
+.message-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280; /* gray-600 */
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Message card */
+.message-item {
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+/* Unread highlight */
+.message-item.unread {
+  background: #f0f9ff; /* soft blue */
+  border-left: 4px solid #0d9488; /* teal */
+}
+
+/* Read state */
+.message-item.read {
+  background: #f9fafb;
+  border-left: 4px solid #d1d5db;
+}
+
+.message-item strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.message-item p {
+  font-size: 14px;
+  color: #374151;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Timestamp (bottom-right corner) */
+.message-time {
+  font-size: 12px;
+  color: #6b7280;
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+}
+
+/* Hover effect */
+.message-item:hover {
+  background: #ecfdf5; /* light green tint */
+  border-color: #0d9488;
+}
