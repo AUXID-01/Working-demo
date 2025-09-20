@@ -1,7 +1,7 @@
 // src/pages/BookAppointments.jsx
-import React, { useState } from 'react'
-import Layout from '../components/Layout'
-import '../page-css/BookAppointments.css'
+import React, { useState, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import '../../page-css/BookAppointments.css'
 
 const specialties = [
   'General Physician',
@@ -10,18 +10,24 @@ const specialties = [
   'Cardiologist',
   'Dermatologist',
   'Gynecologist',
+  'Neurologist',
 ]
 
 const doctorsBySpecialty = {
   'General Physician': ['Dr. Roy', 'Dr. Sharma'],
   Pediatrician: ['Dr. Mehta', 'Dr. Gupta'],
-  Dentist: ['Dr. Sen', 'Dr. Das'],
-  Cardiologist: ['Dr. Bose', 'Dr. Khan'],
-  Dermatologist: ['Dr. Ray', 'Dr. Sinha'],
+  Dentist: ['Dr. Sen', 'Dr. Das', 'Dr. Priya Nair'],
+  Cardiologist: ['Dr. Bose', 'Dr. Khan', 'Dr. Aditi Sharma'],
+  Dermatologist: ['Dr. Ray', 'Dr. Sinha', 'Dr. Rajesh Kumar'],
   Gynecologist: ['Dr. Nair', 'Dr. Verma'],
+  Neurologist: ['Dr. Arjun Mehta'],
 }
 
 function BookAppointments() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const doctorData = location.state || {}
+
   const [formData, setFormData] = useState({
     specialty: '',
     doctor: '',
@@ -34,10 +40,20 @@ function BookAppointments() {
     contactInfo: '',
   })
 
+  // ✅ Prefill doctor & specialty if navigated from Doctors page
+  useEffect(() => {
+    if (doctorData.doctor && doctorData.specialty) {
+      setFormData((prev) => ({
+        ...prev,
+        doctor: doctorData.doctor,
+        specialty: doctorData.specialty,
+      }))
+    }
+  }, [doctorData])
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-    // reset doctor if specialty changes
     if (name === 'specialty') setFormData((prev) => ({ ...prev, doctor: '' }))
   }
 
@@ -48,10 +64,15 @@ function BookAppointments() {
   }
 
   return (
-    <Layout
-      title="Book Appointment"
-      subtitle="Schedule your consultation easily"
-    >
+    <div className="appointment-page">
+      {/* Back Button */}
+      <button className="back-btn" onClick={() => navigate('/doctors')}>
+        ← Back to Doctors
+      </button>
+
+      <h2 className="page-title">Book Appointment</h2>
+      <p className="page-subtitle">Schedule your consultation easily</p>
+
       <form className="appointment-form" onSubmit={handleSubmit}>
         {/* Specialty */}
         <div className="form-group">
@@ -82,7 +103,7 @@ function BookAppointments() {
               required
             >
               <option value="">-- Choose Doctor --</option>
-              {doctorsBySpecialty[formData.specialty].map((doc) => (
+              {doctorsBySpecialty[formData.specialty]?.map((doc) => (
                 <option key={doc} value={doc}>
                   {doc}
                 </option>
@@ -184,7 +205,7 @@ function BookAppointments() {
           Confirm Booking
         </button>
       </form>
-    </Layout>
+    </div>
   )
 }
 

@@ -1,0 +1,147 @@
+.payments-container {
+  padding: 16px 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Section Title */
+.section-title {
+  color: #16685e;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Payment Card */
+.payment-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.payment-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.payment-summary h4 {
+  margin: 0 0 4px 0;
+  color: #16685e;
+  font-weight: 600;
+}
+
+.payment-summary p {
+  margin: 0 0 4px 0;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.payment-details {
+  margin-top: 10px;
+  font-size: 0.88rem;
+  color: #333;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.status-badge.paid {
+  background: #e6f4f2;
+  color: #16685e;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.failed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Amount */
+.amount {
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Buttons */
+.btn.small {
+  margin-top: 8px;
+  padding: 6px 12px;
+  background: #16685e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn.small:hover {
+  background: #12534a;
+}
+
+/* Filter Bar */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+/* Search Input */
+.filter-bar input.search-input {
+  flex: 1;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+/* Dropdown Filter */
+.filter-bar select.status-filter {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #fff;
+  color: #333;
+  transition: 0.2s;
+}
+
+.filter-bar select.status-filter:focus {
+  outline: none;
+  border-color: #16685e;
+}
+
+/* Active / Hover States for Buttons in Filter Bar */
+.filter-bar button.active,
+.filter-bar button:hover {
+  background: #16685e;
+  color: #fff;
+}
+
+/* Status Colors for Text */
+.status-paid {
+  color: #16685e;
+  font-weight: 600;
+}
+
+.status-pending {
+  color: #d97706;
+  font-weight: 600;
+}
+
+.status-failed {
+  color: #dc2626;
+  font-weight: 600;
+}

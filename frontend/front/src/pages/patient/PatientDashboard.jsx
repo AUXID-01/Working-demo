@@ -1,6 +1,6 @@
 // src/pages/Dashboard.jsx
 import React, { useState, useEffect } from 'react'
-import Layout from '../components/Layout'
+import Layout from '../../components/Layout'
 import {
   FaCalendarAlt,
   FaUserMd,
@@ -137,7 +137,7 @@ function Dashboard() {
           </h3>
           <div className="card-content">
             <ul>
-              <li>Take BP medicine at 8pm.</li>
+              <li>Take tmkc BP medicine at 8pm.</li>
               <li>Show up for appointment tomorrow.</li>
             </ul>
           </div>

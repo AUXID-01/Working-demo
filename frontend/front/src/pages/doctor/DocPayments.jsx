@@ -1,31 +1,32 @@
+// src/pages/DocPayments.jsx
 import React, { useState } from 'react'
-import Layout from '../components/Layout'
-import '../page-css/Payments.css'
+import DocLayout from '../../components/DocLayout'
+import '../../page-css/Payments.css'
 
-function Payments() {
+function DocPayments() {
   const [payments] = useState([
     {
       id: 1,
       date: '2025-09-15',
-      doctor: 'Dr. Roy',
+      patient: 'John Doe',
       service: 'Consultation',
       method: 'UPI',
       amount: '₹500',
-      status: 'Paid',
+      status: 'Received',
     },
     {
       id: 2,
       date: '2025-09-10',
-      doctor: 'Dr. Sharma',
+      patient: 'Jane Smith',
       service: 'Prescription Review',
       method: 'Credit Card',
       amount: '₹300',
-      status: 'Paid',
+      status: 'Received',
     },
     {
       id: 3,
       date: '2025-09-05',
-      doctor: 'Dr. Mehta',
+      patient: 'Alice Johnson',
       service: 'Consultation',
       method: 'Cash',
       amount: '₹400',
@@ -33,23 +34,26 @@ function Payments() {
     },
   ])
 
-  const totalSpent = payments
-    .filter((p) => p.status === 'Paid')
+  const totalReceived = payments
+    .filter((p) => p.status === 'Received')
     .reduce((sum, p) => sum + parseInt(p.amount.replace('₹', '')), 0)
 
   const pendingPayments = payments.filter((p) => p.status === 'Pending')
 
   const lastPaymentDate =
-    payments.find((p) => p.status === 'Paid')?.date || 'N/A'
+    payments.find((p) => p.status === 'Received')?.date || 'N/A'
 
   return (
-    <Layout title="Payments" subtitle="Track your expenses and bills">
+    <DocLayout
+      title="Payments"
+      subtitle="Track your earnings and pending payments"
+    >
       <div className="payments-container">
         {/* Summary Card */}
         <div className="summary-card">
           <div>
-            <h3>Total Spent</h3>
-            <p>₹{totalSpent}</p>
+            <h3>Total Received</h3>
+            <p>₹{totalReceived}</p>
           </div>
           <div>
             <h3>Pending</h3>
@@ -69,14 +73,14 @@ function Payments() {
               <div className="payment-info">
                 <h4>{p.service}</h4>
                 <p>
-                  {p.doctor} • {p.method}
+                  {p.patient} • {p.method}
                 </p>
                 <small>{p.date}</small>
               </div>
               <div className="payment-actions">
                 <span
                   className={`status-badge ${
-                    p.status === 'Paid'
+                    p.status === 'Received'
                       ? 'paid'
                       : p.status === 'Pending'
                       ? 'pending'
@@ -86,18 +90,18 @@ function Payments() {
                   {p.status}
                 </span>
                 <p className="amount">{p.amount}</p>
-                {p.status === 'Paid' ? (
+                {p.status === 'Received' ? (
                   <button className="btn small">Download Receipt</button>
                 ) : (
-                  <button className="btn small pay-btn">Pay Now</button>
+                  <button className="btn small pay-btn">Send Reminder</button>
                 )}
               </div>
             </div>
           ))}
         </div>
       </div>
-    </Layout>
+    </DocLayout>
   )
 }
 
-export default Payments
+export default DocPayments

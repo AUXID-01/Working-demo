@@ -1,17 +1,18 @@
 // src/pages/Doctors.jsx
 import React, { useState, useEffect } from 'react'
-import Layout from '../components/Layout'
+import Layout from '../../components/Layout'
 import { FaStar, FaPhone, FaEnvelope, FaCalendarCheck } from 'react-icons/fa'
-import '../page-css/Doctors.css'
+import { useNavigate } from 'react-router-dom' // 👈 import navigate
+import '../../page-css/Doctors.css'
 
 function Doctors() {
   const [doctors, setDoctors] = useState([])
   const [filteredDoctors, setFilteredDoctors] = useState([])
   const [search, setSearch] = useState('')
   const [filterSpecialty, setFilterSpecialty] = useState('All')
+  const navigate = useNavigate()
   const token = localStorage.getItem('token')
 
-  // ✅ Sample data (fallback if API fails)
   const sampleDoctors = [
     {
       id: 1,
@@ -168,8 +169,17 @@ function Doctors() {
                   <span>{doc.rating.toFixed(1)}</span>
                 </p>
                 <div className="doctor-actions">
-                 
-                  <button className="btn book">
+                  <button
+                    className="btn book"
+                    onClick={() =>
+                      navigate('/book-appointment', {
+                        state: {
+                          doctor: doc.name,
+                          specialty: doc.specialization,
+                        },
+                      })
+                    }
+                  >
                     <FaCalendarCheck /> Book
                   </button>
                 </div>

@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
-import '../page-css/Login.css'
-import emailIcon from '../assets/mark_email_unread.png'
-import lockIcon from '../assets/Lock.png'
-import loginBg from '../assets/signbg.svg'
+import '../../page-css/Login.css'
+import emailIcon from '../../assets/mark_email_unread.png'
+import lockIcon from '../../assets/Lock.png'
+import loginBg from '../../assets/signbg.svg'
 
 function Login() {
-  // 🔹 State handling
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
 
-  // 🔹 Form submit handling
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -18,6 +16,7 @@ function Login() {
       setError('Please fill in both fields.')
       return
     }
+
     try {
       const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
@@ -25,15 +24,29 @@ function Login() {
         body: JSON.stringify({ email, password }),
       })
       const data = await response.json()
+
       if (!response.ok) {
-        setError(data.message)
+        setError(data.message || 'Login failed.')
         return
       }
+
       setError(null)
+
       // Store token for authenticated routes
       localStorage.setItem('token', data.token)
-      // Redirect after login
-      window.location.href = '/dashboard'
+
+      // Role-based redirection
+      // Assuming your backend sends `role` in the response
+      const role = data.role // 'admin', 'doctor', 'patient'
+      if (role === 'admin') {
+        window.location.href = '/admin-dashboard'
+      } else if (role === 'doctor') {
+        window.location.href = '/doc-dashboard'
+      } else if (role === 'patient') {
+        window.location.href = '/dashboard'
+      } else {
+        setError('Invalid role assigned.')
+      }
     } catch (err) {
       setError('Login failed. Try again.')
     }

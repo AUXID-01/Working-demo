@@ -1,8 +1,8 @@
 // src/pages/Appointments.jsx
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Layout from '../components/Layout'
-import '../page-css/Appointments.css'
+import Layout from '../../components/Layout'
+import '../../page-css/Appointments.css'
 
 const dummyAppointments = [
   {

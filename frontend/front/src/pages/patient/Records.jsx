@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Layout from '../components/Layout'
-import '../page-css/Records.css'
+import Layout from '../../components/Layout'
+import '../../page-css/Records.css'
 
 const dummyRecords = [
   {
@@ -58,7 +58,7 @@ function Records() {
           {filteredRecords.map((rec) => (
             <div key={rec.id} className="record-card">
               <div className="record-info">
-                <h3 className='title'>{rec.title}</h3>
+                <h3 className="title">{rec.title}</h3>
                 <p className="meta">
                   {rec.type} • {rec.doctor} • {rec.date}
                 </p>

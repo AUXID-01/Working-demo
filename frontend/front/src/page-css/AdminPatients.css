@@ -1,0 +1,50 @@
+/* Table adjustments for 4 columns */
+table th,
+table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+/* Hover effect on rows */
+.patient-row:hover {
+  background-color: #f0f5f5;
+}
+
+/* Expanded details */
+.patient-details-row td {
+  background: #f9f9f9;
+  padding: 12px 14px;
+}
+
+.patient-details p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fff;
+  cursor: pointer;
+}

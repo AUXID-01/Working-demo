@@ -1,10 +1,38 @@
+/* Appointment Page Background */
+.appointment-page {
+  min-height: 100vh;
+  display: flex;
+  min-width: 100vw;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1ed1c2, #0e918c);
+  padding: 20px;
+}
+
+/* Appointment Form Card */
 .appointment-form {
-  max-width: 600px;
-  margin: 0 auto;
-  background: #ffffff; /* white card */
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 450px;
+  background: #ffffff;
+  padding: 32px 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Title & Subtitle */
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.page-subtitle {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 /* Form Group */
@@ -17,29 +45,30 @@
 .form-group label {
   font-weight: 600;
   margin-bottom: 6px;
-  font-size: 0.95rem;
-  color: #222; /* darker text */
+  font-size: 0.9rem;
+  color: #222;
 }
 
 /* Inputs, Selects, Textareas */
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 10px 12px;
+  padding: 12px 14px;
   font-size: 0.95rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  background: #f9f9f9;
   color: #000;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #16685E; /* theme teal */
-  box-shadow: 0 0 4px rgba(22, 104, 94, 0.3);
+  border-color: #1ca59a;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(28, 165, 154, 0.3);
 }
 
 /* Textareas */
@@ -48,28 +77,47 @@ textarea {
   min-height: 70px;
 }
 
-/* Button */
+/* Submit Button */
 .btn {
   display: block;
   width: 100%;
-  background-color: #16685E;
+  background-color: #1ca59a;
   color: #fff;
   padding: 12px;
   font-size: 1rem;
   font-weight: 600;
   border: none;
-  border-radius: 10px;
+  border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease, transform 0.2s ease;
 }
 
 .btn:hover {
-  background-color: #11524b;
+  background-color: #178a81;
+  transform: translateY(-1px);
+}
+
+/* Back Button */
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.back-btn:hover {
+  opacity: 0.8;
 }
 
 /* Responsive */
 @media (max-width: 640px) {
   .appointment-form {
-    padding: 18px;
+    padding: 24px 20px;
   }
 }

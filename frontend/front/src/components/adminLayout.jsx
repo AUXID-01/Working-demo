@@ -1,44 +1,42 @@
-// src/components/Layout.jsx
+// src/components/AdminLayout.jsx
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
-  FaCalendarAlt,
+  FaUsers,
   FaUserMd,
-  FaPills,
   FaFileMedical,
   FaBell,
   FaEnvelope,
-  FaCreditCard,
-  FaHeartbeat,
-  FaCalendarCheck,
-  FaAmbulance,
-  FaSearch,
   FaCog,
   FaTimes,
+  FaCreditCard,
+  FaSearch,
+  FaAmbulance,
+  FaChartLine,
 } from 'react-icons/fa'
 import '../page-css/Dashboard.css'
 import Logo from '../assets/Logo.svg'
 
-function Layout({ title, subtitle, children }) {
-  const [user, setUser] = useState(null)
+function AdminLayout({ title, subtitle, children }) {
+  const [admin, setAdmin] = useState(null)
   const [showEmergency, setShowEmergency] = useState(false)
   const token = localStorage.getItem('token')
   const location = useLocation()
 
   useEffect(() => {
     if (!token) return
-    fetch('http://localhost:5000/api/user/me', {
+    fetch('http://localhost:5000/api/admin/me', {
       headers: {
         Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
-      .then((data) => setUser(data))
-      .catch(() => setUser(null))
+      .then((data) => setAdmin(data))
+      .catch(() => setAdmin(null))
   }, [token])
 
-  // Emergency actions
+  // Emergency actions (optional)
   const handleCallAmbulance = () => alert('🚑 Calling Ambulance...')
   const handleCallEmergencyHelp = () =>
     alert('📞 Calling Emergency Medical Help...')
@@ -60,63 +58,63 @@ function Layout({ title, subtitle, children }) {
 
           <nav className="menu">
             <Link
-              to="/dashboard"
-              className={location.pathname === '/dashboard' ? 'active' : ''}
+              to="/admin-dashboard"
+              className={
+                location.pathname === '/admin-dashboard' ? 'active' : ''
+              }
             >
-              <FaCalendarAlt /> Dashboard
+              <FaChartLine /> Dashboard
             </Link>
             <Link
-              to="/appointments"
-              className={location.pathname === '/appointments' ? 'active' : ''}
+              to="/admin-users"
+              className={location.pathname === '/admin-users' ? 'active' : ''}
             >
-              <FaCalendarCheck /> Appointments
+              <FaUsers /> Users
             </Link>
             <Link
-              to="/doctors"
-              className={location.pathname === '/doctors' ? 'active' : ''}
+              to="/admin-doctors"
+              className={location.pathname === '/admin-doctors' ? 'active' : ''}
             >
               <FaUserMd /> Doctors
             </Link>
             <Link
-              to="/medicines"
-              className={location.pathname === '/medicines' ? 'active' : ''}
+              to="/admin-patients"
+              className={
+                location.pathname === '/admin-patients' ? 'active' : ''
+              }
             >
-              <FaPills /> Medicines
+              <FaUsers /> Patients
             </Link>
             <Link
-              to="/records"
-              className={location.pathname === '/records' ? 'active' : ''}
+              to="/admin-records"
+              className={location.pathname === '/admin-records' ? 'active' : ''}
             >
-              <FaFileMedical /> Records
+              <FaFileMedical /> Past Sessions
             </Link>
             <Link
-              to="/reminders"
-              className={location.pathname === '/reminders' ? 'active' : ''}
-            >
-              <FaBell /> Reminders
-            </Link>
-            <Link
-              to="/messages"
-              className={location.pathname === '/messages' ? 'active' : ''}
+              to="/admin-messages"
+              className={
+                location.pathname === '/admin-messages' ? 'active' : ''
+              }
             >
               <FaEnvelope /> Messages
             </Link>
             <Link
-              to="/payments"
-              className={location.pathname === '/payments' ? 'active' : ''}
+              to="/admin-payments"
+              className={
+                location.pathname === '/admin-payments' ? 'active' : ''
+              }
             >
               <FaCreditCard /> Payments
             </Link>
             <Link
-              to="/symptom-checker"
-              className={
-                location.pathname === '/symptom-checker' ? 'active' : ''
-              }
+              to="/admin-reports"
+              className={location.pathname === '/admin-reports' ? 'active' : ''}
             >
-              <FaHeartbeat /> Symptom Checker
+              <FaChartLine /> Reports
             </Link>
 
-            {/* Emergency Button */}
+            {/* Optional Emergency */}
             <Link
               to="#"
               onClick={(e) => {
@@ -129,20 +127,21 @@ function Layout({ title, subtitle, children }) {
           </nav>
         </div>
 
-        {/* Profile Section - clickable */}
-        <Link to="/profile" className="profile">
+        {/* Profile Section */}
+        <Link to="/admin-profile" className="profile">
           <div className="avatar-circle">
-            {user?.Username
-              ? user.Username.split(' ')
+            {admin?.name
+              ? admin.name
+                  .split(' ')
                   .map((n) => n[0])
                   .join('')
                   .toUpperCase()
-              : 'H'}
+              : 'A'}
           </div>
           <div>
-            <p className="profile-name">{user?.Username || 'Happy'}</p>
+            <p className="profile-name">{admin?.name || 'Admin'}</p>
             <small className="profile-email">
-              {user?.email || 'happy@gmail.com'}
+              {admin?.email || 'admin@gmail.com'}
             </small>
           </div>
         </Link>
@@ -210,4 +209,4 @@ function Layout({ title, subtitle, children }) {
   )
 }
 
-export default Layout
+export default AdminLayout

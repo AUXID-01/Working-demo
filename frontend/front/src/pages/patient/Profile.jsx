@@ -1,7 +1,7 @@
 // src/pages/Profile.jsx
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import '../page-css/Profile.css'
+import '../../page-css/Profile.css'
 
 const Profile = () => {
   const navigate = useNavigate()

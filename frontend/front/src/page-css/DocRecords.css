@@ -1,0 +1,155 @@
+.records-page {
+  padding: 20px;
+}
+
+/* Filter bar for patient & type */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Dropdown selects */
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  color: #000;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-select:focus {
+  border-color: #16685E;
+  box-shadow: 0 0 4px rgba(22, 104, 94, 0.4);
+  outline: none;
+}
+
+/* Records container */
+.records-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Individual record card */
+.record-card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Record info section */
+.record-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.record-info .title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #16685e;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.record-info .meta {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Patient Badge */
+.record-info .patient-badge {
+  background-color: #1e40af;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Type Badge */
+.record-info .type-badge {
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.type-badge.Prescription {
+  background-color: #16a34a; /* green */
+}
+
+.type-badge['Test Report'] {
+  background-color: #1e40af; /* blue */
+}
+
+.type-badge['X-Ray'] {
+  background-color: #9333ea; /* purple */
+}
+
+/* Actions section */
+.record-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+/* View file button */
+.record-actions .btn-outline {
+  padding: 6px 12px;
+  border: 1px solid #16685e;
+  border-radius: 6px;
+  background: #fff;
+  color: #16685e;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.record-actions .btn-outline:hover {
+  background: #16685e;
+  color: #fff;
+}
+
+/* Delete button */
+.record-actions .btn-delete {
+  padding: 6px 12px;
+  border: 1px solid #d9534f;
+  border-radius: 6px;
+  background: #fff;
+  color: #d9534f;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.record-actions .btn-delete:hover {
+  background: #d9534f;
+  color: #fff;
+}
+
+/* No records */
+.no-records {
+  text-align: center;
+  color: #777;
+  font-size: 0.9rem;
+  margin-top: 20px;
+}

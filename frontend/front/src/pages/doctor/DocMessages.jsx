@@ -1,30 +1,34 @@
-// src/pages/Messages.jsx
+// src/pages/DocMessages.jsx
 import React, { useState } from 'react'
-import Layout from '../components/Layout'
-import '../page-css/Messages.css'
+import DocLayout from '../../components/DocLayout'
+import '../../page-css/Messages.css'
 
 // Example data with timestamps
 const dummyMessages = [
   {
     id: 1,
-    title: 'Appointment Reminder',
-    content: 'Your appointment with Dr. Roy is tomorrow at 10:00 AM.',
+    sender: 'John Doe',
+    title: 'Appointment Request',
+    content:
+      'Patient John Doe requested an appointment for 2025-09-21 at 3:00 PM.',
     read: false,
     createdAt: new Date(), // today
   },
   {
     id: 2,
-    title: 'New Message',
-    content: 'Dr. Sharma has sent you a message regarding your prescription.',
+    sender: 'Jane Smith',
+    title: 'Prescription Follow-up',
+    content: 'Patient Jane Smith asked for clarification on her prescription.',
     read: false,
     createdAt: new Date(new Date().setDate(new Date().getDate() - 1)), // yesterday
   },
   {
     id: 3,
-    title: 'Payment Update',
-    content: 'Your payment for consultation has been received.',
+    sender: 'Hospital Admin',
+    title: 'Lab Report Update',
+    content: 'New lab reports have been uploaded for review.',
     read: true,
-    createdAt: new Date(new Date().setDate(new Date().getDate() - 3)), // 3 days ago
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 4)), // 4 days ago
   },
 ]
 
@@ -46,7 +50,7 @@ const groupMessagesByDate = (messages) => {
   }
 }
 
-function Messages() {
+function DocMessages() {
   const [messages, setMessages] = useState(dummyMessages)
 
   const toggleRead = (id) => {
@@ -58,7 +62,10 @@ function Messages() {
   const grouped = groupMessagesByDate(messages)
 
   return (
-    <Layout title="Messages" subtitle="Stay updated with your notifications">
+    <DocLayout
+      title="Messages"
+      subtitle="Stay updated with patient requests and notifications"
+    >
       <div className="messages-container">
         {Object.entries(grouped).map(
           ([section, msgs]) =>
@@ -72,7 +79,11 @@ function Messages() {
                     onClick={() => toggleRead(msg.id)}
                   >
                     <strong>{msg.title}</strong>
-                    <p>{msg.content}</p>
+                    <p>
+                      <em>From: {msg.sender}</em>
+                      <br />
+                      {msg.content}
+                    </p>
                     <span className="message-time">
                       {formatTime(msg.createdAt)}
                     </span>
@@ -82,8 +93,8 @@ function Messages() {
             )
         )}
       </div>
-    </Layout>
+    </DocLayout>
   )
 }
 
-export default Messages
+export default DocMessages

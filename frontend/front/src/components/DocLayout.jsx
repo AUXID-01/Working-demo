@@ -1,41 +1,40 @@
-// src/components/Layout.jsx
+// src/components/DocLayout.jsx
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import {
   FaCalendarAlt,
   FaUserMd,
-  FaPills,
   FaFileMedical,
   FaBell,
   FaEnvelope,
-  FaCreditCard,
-  FaHeartbeat,
-  FaCalendarCheck,
-  FaAmbulance,
   FaSearch,
   FaCog,
   FaTimes,
+  FaCalendarCheck,
+  FaHistory,
+  FaWallet,
+  FaAmbulance,
 } from 'react-icons/fa'
 import '../page-css/Dashboard.css'
 import Logo from '../assets/Logo.svg'
 
-function Layout({ title, subtitle, children }) {
-  const [user, setUser] = useState(null)
+function DocLayout({ title, subtitle, children }) {
+  const [doctor, setDoctor] = useState(null)
   const [showEmergency, setShowEmergency] = useState(false)
   const token = localStorage.getItem('token')
   const location = useLocation()
 
   useEffect(() => {
     if (!token) return
-    fetch('http://localhost:5000/api/user/me', {
+    fetch('http://localhost:5000/api/doctor/me', {
       headers: {
         Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
-      .then((data) => setUser(data))
-      .catch(() => setUser(null))
+      .then((data) => setDoctor(data))
+      .catch(() => setDoctor(null))
   }, [token])
 
   // Emergency actions
@@ -55,65 +54,63 @@ function Layout({ title, subtitle, children }) {
 
           <div className="search-box">
             <FaSearch className="icon" />
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search Patients" />
           </div>
 
           <nav className="menu">
             <Link
-              to="/dashboard"
-              className={location.pathname === '/dashboard' ? 'active' : ''}
+              to="/doc-dashboard"
+              className={location.pathname === '/doc-dashboard' ? 'active' : ''}
             >
               <FaCalendarAlt /> Dashboard
             </Link>
             <Link
-              to="/appointments"
-              className={location.pathname === '/appointments' ? 'active' : ''}
+              to="/doc-appointments"
+              className={
+                location.pathname === '/doc-appointments' ? 'active' : ''
+              }
             >
               <FaCalendarCheck /> Appointments
             </Link>
             <Link
-              to="/doctors"
-              className={location.pathname === '/doctors' ? 'active' : ''}
+              to="/doc-patients"
+              className={location.pathname === '/doc-patients' ? 'active' : ''}
             >
-              <FaUserMd /> Doctors
+              <FaUserMd /> Patients
             </Link>
             <Link
-              to="/medicines"
-              className={location.pathname === '/medicines' ? 'active' : ''}
-            >
-              <FaPills /> Medicines
-            </Link>
-            <Link
-              to="/records"
-              className={location.pathname === '/records' ? 'active' : ''}
+              to="/doc-records"
+              className={location.pathname === '/doc-records' ? 'active' : ''}
             >
               <FaFileMedical /> Records
             </Link>
             <Link
-              to="/reminders"
-              className={location.pathname === '/reminders' ? 'active' : ''}
-            >
-              <FaBell /> Reminders
-            </Link>
-            <Link
-              to="/messages"
-              className={location.pathname === '/messages' ? 'active' : ''}
+              to="/doc-messages"
+              className={location.pathname === '/doc-messages' ? 'active' : ''}
             >
               <FaEnvelope /> Messages
             </Link>
             <Link
-              to="/payments"
-              className={location.pathname === '/payments' ? 'active' : ''}
+              to="/doc-reminders"
+              className={location.pathname === '/doc-reminders' ? 'active' : ''}
             >
-              <FaCreditCard /> Payments
+              <FaBell /> Reminders
             </Link>
+
+            {/* New menu items */}
             <Link
-              to="/symptom-checker"
+              to="/doc-past-sessions"
               className={
-                location.pathname === '/symptom-checker' ? 'active' : ''
+                location.pathname === '/doc-past-sessions' ? 'active' : ''
               }
             >
-              <FaHeartbeat /> Symptom Checker
+              <FaHistory /> Past Sessions
+            </Link>
+            <Link
+              to="/doc-payments"
+              className={location.pathname === '/doc-payments' ? 'active' : ''}
+            >
+              <FaWallet /> Payments
             </Link>
 
             {/* Emergency Button */}
@@ -129,20 +126,21 @@ function Layout({ title, subtitle, children }) {
           </nav>
         </div>
 
-        {/* Profile Section - clickable */}
-        <Link to="/profile" className="profile">
+        {/* Profile Section */}
+        <Link to="/doc-profile" className="profile">
           <div className="avatar-circle">
-            {user?.Username
-              ? user.Username.split(' ')
+            {doctor?.name
+              ? doctor.name
+                  .split(' ')
                   .map((n) => n[0])
                   .join('')
                   .toUpperCase()
-              : 'H'}
+              : 'D'}
           </div>
           <div>
-            <p className="profile-name">{user?.Username || 'Happy'}</p>
+            <p className="profile-name">{doctor?.name || 'Doctor'}</p>
             <small className="profile-email">
-              {user?.email || 'happy@gmail.com'}
+              {doctor?.email || 'doctor@gmail.com'}
             </small>
           </div>
         </Link>
@@ -210,4 +208,4 @@ function Layout({ title, subtitle, children }) {
   )
 }
 
-export default Layout
+export default DocLayout

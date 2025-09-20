@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Layout from '../components/Layout'
+import Layout from '../../components/Layout'
 import { FaBell, FaTrash, FaPlus } from 'react-icons/fa'
-import '../page-css/Reminders.css'
+import '../../page-css/Reminders.css'
 
 function Reminders() {
   const [reminders, setReminders] = useState([

@@ -1,7 +1,7 @@
 // src/pages/Medicines.jsx
 import React, { useState } from 'react'
-import Layout from '../components/Layout'
-import '../page-css/Medicines.css'
+import Layout from '../../components/Layout'
+import '../../page-css/Medicines.css'
 
 const dummyMedicines = [
   {
@@ -88,6 +88,3 @@ function Medicines() {
 }
 
 export default Medicines
-
-
-

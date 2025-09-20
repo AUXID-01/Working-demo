@@ -1,0 +1,202 @@
+/* src/page-css/AdminUsers.css or inside Dashboard.css */
+
+/* Container for the table */
+.table-container {
+  margin: 20px 0;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+}
+
+/* Table styling */
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Poppins', sans-serif;
+}
+
+.table-container th,
+.table-container td {
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.table-container thead th {
+  background-color: #16685e;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.table-container tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s ease;
+  cursor: default;
+}
+
+.table-container tbody tr:hover {
+  background-color: #f4f7f7;
+}
+
+.table-container tbody td {
+  color: #333;
+}
+
+/* Role badges */
+.table-container tbody td:nth-child(3) {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+/* Optional: Different colors for role badges */
+.table-container tbody td.role-patient {
+  color: #1e40af; /* blue */
+  font-weight: 600;
+}
+
+.table-container tbody td.role-doctor {
+  color: #16685e; /* teal */
+  font-weight: 600;
+}
+
+.table-container tbody td.role-admin {
+  color: #d97706; /* amber */
+  font-weight: 600;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .table-container table,
+  .table-container thead,
+  .table-container tbody,
+  .table-container th,
+  .table-container td,
+  .table-container tr {
+    display: block;
+  }
+
+  .table-container tr {
+    margin-bottom: 15px;
+  }
+
+  .table-container td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .table-container td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    width: calc(50% - 16px);
+    text-align: left;
+    font-weight: 600;
+    color: #444;
+  }
+
+  .table-container thead {
+    display: none;
+  }
+}
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.filter-bar select {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-family: 'Poppins', sans-serif;
+  align-items: center;
+}
+
+/* Search input */
+.search-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #16685e;
+}
+
+/* Role dropdown */
+.role-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  background: #fff;
+  cursor: pointer;
+  transition: border 0.2s;
+  color:#333
+}
+
+.role-select:focus {
+  outline: none;
+  border-color: #16685e;
+}
+
+/* Table styling */
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Poppins', sans-serif;
+}
+
+thead tr {
+  background: #f4f7f7;
+}
+
+th, td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.role-doctor {
+  color: #1e40af;
+  font-weight: 500;
+}
+
+.role-patient {
+  color: #16685e;
+  font-weight: 500;
+}
+
+/* Responsive for small screens */
+@media (max-width: 768px) {
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
