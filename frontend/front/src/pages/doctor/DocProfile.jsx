@@ -1,18 +1,18 @@
-// src/pages/Profile.jsx
+// src/pages/DocProfile.jsx
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../../page-css/Profile.css'
 
-
-const Profile = () => {
+const DocProfile = () => {
   const navigate = useNavigate()
 
-  // Mock user data (later this will come from backend / context)
+  // Mock user data (later replace with backend/context)
   const user = {
-    name: 'Happy Sharma',
-    age: 21,
-    email: 'happy@gmail.com',
+    name: 'Dr. Doctor ',
+    age: 35,
+    email: 'Doctor@gmail.com',
     contact: '+91 98765 43210',
+    specialization: 'Cardiology', // extra field for doctors
   }
 
   const handleLogout = () => {
@@ -21,21 +21,21 @@ const Profile = () => {
   }
 
   const handleEdit = () => {
-    navigate('/edit-profile')
+    navigate('/edit-doc-profile')
   }
 
   const handleBack = () => {
-    navigate('/dashboard')
+    navigate('/doc-dashboard')
   }
 
   return (
     <div className="page-background">
+      {/* Back button outside the card */}
       <button className="back-btn" onClick={handleBack}>
         Back
       </button>
-      <div className="profile-page">
-        {/* Back button */}
 
+      <div className="profile-page">
         <h1 className="page-title">My Profile</h1>
 
         <div className="profile-info">
@@ -55,6 +55,10 @@ const Profile = () => {
             <span className="label">Contact:</span>
             <span className="value">{user.contact}</span>
           </div>
+          <div className="info-item">
+            <span className="label">Specialization:</span>
+            <span className="value">{user.specialization}</span>
+          </div>
         </div>
 
         <div className="profile-buttons">
@@ -70,4 +74,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default DocProfile

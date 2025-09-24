@@ -1,96 +1,186 @@
 import React, { useState } from 'react'
 import '../../page-css/Register.css'
-import emailIcon from '../../assets/mark_email_unread.png'
-import LockIcon from '../../assets/Lock.png'
-import userIcon from '../../assets/User.png'
-import dobIcon from '../../assets/Calendar.png'
-import phoneIcon from '../../assets/Phone.png'
-import eyeOpen from '../../assets/eye-open.png'
-import eyeClosed from '../../assets/eye-closed.png'
-import loginBg from '../../assets/pd.svg'
+
+// React Icons
+import {
+  FaUser,
+  FaLock,
+  FaPhone,
+  FaCalendarAlt,
+  FaEye,
+  FaEyeSlash,
+  FaEnvelope,
+  FaBriefcase,
+} from 'react-icons/fa'
+
+// Role-specific forms
+import PatientDetails from '../role-pages/patientDetails'
+import DoctorProfessionalInfo from '../role-pages/DoctorProfessionalInfo'
+import DoctorVerificationDocs from '../role-pages/DoctorVerificationDocs'
+import DoctorPracticeDetails from '../role-pages/DoctorPracticeDetails'
+import AdminDetails from '../role-pages/adminDetails'
 
 function Register() {
-  const [step, setStep] = useState(1) // Step 1: basic info, Step 2: personal details
+  const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
-    Username: '',
+    fullName: '',
     email: '',
     password: '',
     confirmPassword: '',
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
     phoneNumber: '',
+    dateOfBirth: '',
+    role: 'patient', // occupation
+
+    // Patient
     gender: '',
-    role: 'patient', // default role
+    address: '',
+    emergencyContact: '',
+    bloodGroup: '',
+    medicalHistory: '',
+
+    // Doctor
+    specialization: '',
+    licenseNumber: '',
+    experienceYears: '',
+    qualifications: '',
+    clinicName: '',
+    clinicAddress: '',
+    consultationFee: '',
+
+    // Admin
+    employeeId: '',
+    adminRole: '',
+    organization: '',
+    contactDetails: '',
   })
+
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [error, setError] = useState(null)
 
+  // Input handler
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
+    const { name, value, files, type } = e.target
+    // support file inputs (if used in doctor docs components)
+    if (type === 'file') {
+      setFormData({ ...formData, [name]: files })
+    } else {
+      setFormData({ ...formData, [name]: value })
+    }
   }
 
+  // Step 1: Frontend validation only
   const handleContinue = (e) => {
     e.preventDefault()
+
+    if (
+      !formData.fullName ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
+      setError('All fields are required')
+      return
+    }
+
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords don't match")
       return
     }
+
     setError(null)
-    setStep(2) // move to personal details step
+
+    // both doctor and other roles go to step 2, but doctors will continue to step 3 & 4
+    setStep(2)
   }
 
+  // Move Next (or submit on final step)
+  const handleNext = async (e) => {
+    e.preventDefault()
+    setError(null)
+
+    // Doctor has multi-step flow (steps 2,3,4)
+    if (formData.role === 'doctor') {
+      if (step < 4) {
+        setStep((s) => s + 1)
+        return
+      } else {
+        // step === 4 -> final submit
+        await handleRegister(e)
+        return
+      }
+    }
+
+    // Patient/Admin: single step (step 2) -> final submit
+    await handleRegister(e)
+  }
+
+  // Back navigation
+  const handleBack = (e) => {
+    e.preventDefault()
+    setError(null)
+    // if on step 2 and you want to go back to step 1
+    if (step > 1) setStep((s) => s - 1)
+  }
+
+  // Final submission to backend
   const handleRegister = async (e) => {
     e.preventDefault()
+
+    const formattedFormData = {
+      ...formData,
+      dateOfBirth: formData.dateOfBirth
+        ? new Date(formData.dateOfBirth).toISOString().split('T')[0]
+        : null,
+    }
+
     try {
       const response = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formattedFormData),
       })
+
       const data = await response.json()
+
       if (!response.ok) {
-        alert(data.message || 'Registration failed')
+        if (data.errors) {
+          setError(data.errors[0].msg)
+        } else {
+          setError(data.message || 'Registration failed')
+        }
         return
       }
-      alert('Registration successful! Please login.')
-      window.location.href = '/login'
+
+      alert('Registration successful!')
+      window.location.href = '/dashboard'
     } catch (err) {
       console.error(err)
-      alert('Registration failed. Try again.')
+      setError('Registration failed. Try again.')
     }
   }
 
   return (
-    <div
-      className="page-background"
-      style={{
-        backgroundImage: `url(${loginBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        minHeight: '100vh',
-      }}
-    >
+    <div className="page-background">
       <div className="register-container">
         <div className="register-card">
           <h2 className="register-title">Register</h2>
           <p className="register-subtitle">
-            {step === 1 ? 'Create your account' : 'Enter your personal details'}
+            {step === 1 ? 'Create your account' : 'Enter your details'}
           </p>
 
-          <form onSubmit={step === 1 ? handleContinue : handleRegister}>
+          {/* IMPORTANT: onSubmit is step 1 -> handleContinue, otherwise handleNext */}
+          <form onSubmit={step === 1 ? handleContinue : handleNext}>
             {step === 1 ? (
               <>
-                {/* Username */}
+                {/* Full Name */}
                 <div className="input-group">
-                  <img src={userIcon} alt="User Icon" />
+                  <FaUser className="icon" />
                   <input
                     type="text"
-                    name="Username"
-                    placeholder="Username"
-                    value={formData.Username}
+                    name="fullName"
+                    placeholder="Full Name"
+                    value={formData.fullName}
                     onChange={handleChange}
                     required
                   />
@@ -98,7 +188,7 @@ function Register() {
 
                 {/* Email */}
                 <div className="input-group">
-                  <img src={emailIcon} alt="Email Icon" />
+                  <FaEnvelope className="icon" />
                   <input
                     type="email"
                     name="email"
@@ -111,7 +201,7 @@ function Register() {
 
                 {/* Password */}
                 <div className="input-group password-group">
-                  <img src={LockIcon} alt="Lock Icon" />
+                  <FaLock className="icon" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     name="password"
@@ -120,17 +210,22 @@ function Register() {
                     onChange={handleChange}
                     required
                   />
-                  <img
-                    src={showPassword ? eyeOpen : eyeClosed}
-                    alt="Toggle Password"
-                    className="eye-icon"
-                    onClick={() => setShowPassword(!showPassword)}
-                  />
+                  {showPassword ? (
+                    <FaEye
+                      className="eye-icon"
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  ) : (
+                    <FaEyeSlash
+                      className="eye-icon"
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  )}
                 </div>
 
                 {/* Confirm Password */}
                 <div className="input-group password-group">
-                  <img src={LockIcon} alt="Lock Icon" />
+                  <FaLock className="icon" />
                   <input
                     type={showConfirmPassword ? 'text' : 'password'}
                     name="confirmPassword"
@@ -139,17 +234,51 @@ function Register() {
                     onChange={handleChange}
                     required
                   />
-                  <img
-                    src={showConfirmPassword ? eyeOpen : eyeClosed}
-                    alt="Toggle Confirm Password"
-                    className="eye-icon"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  {showConfirmPassword ? (
+                    <FaEye
+                      className="eye-icon"
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                    />
+                  ) : (
+                    <FaEyeSlash
+                      className="eye-icon"
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                    />
+                  )}
+                </div>
+
+                {/* Phone Number */}
+                <div className="input-group phone-icon">
+                  <FaPhone className="icon" />
+                  <input
+                    type="tel"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    required
                   />
                 </div>
 
-                {/* Role Selection */}
+                {/* Date of Birth */}
                 <div className="input-group">
-                  <img src={userIcon} alt="Role" />
+                  <FaCalendarAlt className="icon" />
+                  <input
+                    type="date"
+                    name="dateOfBirth"
+                    value={formData.dateOfBirth}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                {/* Role */}
+                <div className="input-group">
+                  <FaBriefcase className="icon" />
                   <select
                     name="role"
                     value={formData.role}
@@ -165,77 +294,75 @@ function Register() {
                 {error && <p className="error-text">{error}</p>}
 
                 <button type="submit" className="btn-register">
-                  Continue
+                  Register
                 </button>
               </>
             ) : (
               <>
-                {/* Personal Details Step */}
-                <div className="input-group">
-                  <img src={userIcon} alt="First Name" />
-                  <input
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+                {/* Role-specific details */}
+                {/* Patient & Admin are single-step after step 1.
+                    Doctor has multi-step pages (2,3,4). */}
 
-                <div className="input-group">
-                  <img src={userIcon} alt="Last Name" />
-                  <input
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+                {formData.role === 'patient' && step === 2 && (
+                  <PatientDetails formData={formData} onChange={handleChange} />
+                )}
 
-                <div className="input-group">
-                  <img src={dobIcon} alt="Date of Birth" />
-                  <input
-                    type="date"
-                    name="dateOfBirth"
-                    value={formData.dateOfBirth}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+                {formData.role === 'admin' && step === 2 && (
+                  <AdminDetails formData={formData} onChange={handleChange} />
+                )}
 
-                <div className="input-group">
-                  <img src={phoneIcon} alt="Phone" />
-                  <input
-                    type="tel"
-                    name="phoneNumber"
-                    placeholder="Phone Number"
-                    value={formData.phoneNumber}
+                {/* Doctor multi-step */}
+                {formData.role === 'doctor' && step === 2 && (
+                  <DoctorProfessionalInfo
+                    formData={formData}
                     onChange={handleChange}
-                    required
                   />
-                </div>
-
-                <div className="input-group">
-                  <img src={userIcon} alt="Gender" />
-                  <select
-                    name="gender"
-                    value={formData.gender}
+                )}
+                {formData.role === 'doctor' && step === 3 && (
+                  <DoctorVerificationDocs
+                    formData={formData}
                     onChange={handleChange}
-                    required
+                  />
+                )}
+                {formData.role === 'doctor' && step === 4 && (
+                  <DoctorPracticeDetails
+                    formData={formData}
+                    onChange={handleChange}
+                  />
+                )}
+
+                {error && <p className="error-text">{error}</p>}
+
+                {/* Buttons: Back + Submit/Next (Submit triggers handleNext which either moves to next or calls handleRegister) */}
+                <div
+                  style={{ display: 'flex', gap: '12px', marginTop: '12px' }}
+                >
+                  <button
+                    type="button"
+                    className="btn-register"
+                    onClick={handleBack}
+                    style={{
+                      background: '#eee',
+                      color: '#222',
+                      flex: '0 0 120px',
+                    }}
                   >
-                    <option value="">-- Select Gender --</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
+                    Back
+                  </button>
 
-                <button type="submit" className="btn-register">
-                  Register
-                </button>
+                  <button
+                    type="submit"
+                    className="btn-register"
+                    style={{ flex: 1 }}
+                  >
+                    {/* For doctor show Next until last page */}
+                    {formData.role === 'doctor'
+                      ? step < 4
+                        ? 'Next'
+                        : 'Submit'
+                      : 'Submit'}
+                  </button>
+                </div>
               </>
             )}
           </form>

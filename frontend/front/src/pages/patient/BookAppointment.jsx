@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import '../../page-css/BookAppointments.css'
+import { FaCalendarAlt, FaClock } from 'react-icons/fa'
+
 
 const specialties = [
   'General Physician',
@@ -22,6 +24,30 @@ const doctorsBySpecialty = {
   Gynecologist: ['Dr. Nair', 'Dr. Verma'],
   Neurologist: ['Dr. Arjun Mehta'],
 }
+
+// Date options: next 30 days
+const getNextDates = (days = 30) => {
+  const dates = []
+  for (let i = 0; i < days; i++) {
+    const d = new Date()
+    d.setDate(d.getDate() + i)
+    const formatted = d.toISOString().split('T')[0] // yyyy-mm-dd
+    dates.push(formatted)
+  }
+  return dates
+}
+
+// Time options: 9:00 to 18:00 every 30 minutes
+const getTimeSlots = () => {
+  const times = []
+  for (let h = 9; h <= 17; h++) {
+    times.push(`${h.toString().padStart(2, '0')}:00`)
+    times.push(`${h.toString().padStart(2, '0')}:30`)
+  }
+  times.push('18:00')
+  return times
+}
+
 
 function BookAppointments() {
   const navigate = useNavigate()
@@ -70,10 +96,9 @@ function BookAppointments() {
         ← Back to Doctors
       </button>
 
-      <h2 className="page-title">Book Appointment</h2>
-      <p className="page-subtitle">Schedule your consultation easily</p>
-
       <form className="appointment-form" onSubmit={handleSubmit}>
+        <h2 className="page-title">Book Appointment</h2>
+        <p className="page-subtitle">Schedule your consultation easily</p>
         {/* Specialty */}
         <div className="form-group">
           <label>Select Specialty</label>
@@ -126,27 +151,48 @@ function BookAppointments() {
           </select>
         </div>
 
-        {/* Date & Time */}
+        {/* Date */}
         <div className="form-group">
           <label>Date</label>
-          <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
+          <div className="select-wrapper">
+            <select
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+              className="select-input"
+            >
+              <option value="">-- Select Date --</option>
+              {getNextDates().map((d) => (
+                <option key={d} value={d}>
+                  {d}
+                </option>
+              ))}
+            </select>
+            <FaCalendarAlt className="select-icon" />
+          </div>
         </div>
 
+        {/* Time */}
         <div className="form-group">
           <label>Time</label>
-          <input
-            type="time"
-            name="time"
-            value={formData.time}
-            onChange={handleChange}
-            required
-          />
+          <div className="select-wrapper">
+            <select
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+              required
+              className="select-input"
+            >
+              <option value="">-- Select Time --</option>
+              {getTimeSlots().map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>
+            <FaClock className="select-icon" />
+          </div>
         </div>
 
         {/* Address (Home Visit only) */}
@@ -202,7 +248,7 @@ function BookAppointments() {
 
         {/* Submit */}
         <button type="submit" className="btn">
-          Confirm Booking
+          Book Appointment
         </button>
       </form>
     </div>

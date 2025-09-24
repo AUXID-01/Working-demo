@@ -22,6 +22,7 @@ import DocMessages from './pages/doctor/DocMessages'
 import DocReminders from './pages/doctor/DocReminders'
 import DocPayments from './pages/doctor/DocPayments'
 import DocPastSessions from './pages/doctor/DocPastSessions'
+import EditDocProfile from './pages/doctor/DocEditeProfile'
 import AdminLayout from './components/adminLayout'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminUsers from './pages/admin/AdminUsers'
@@ -32,9 +33,17 @@ import AdminMessages from './pages/admin/AdminMessages'
 import AdminPayments from './pages/admin/AdminPayments'
 import Reports from './pages/admin/AdminReports'
 import AdminProfile from './pages/admin/AdminProfile'
-import SymptomChecker from './pages/patient/SymptomChecker'
+import SymptomInfo from './pages/patient/SymptomChecker/SymptomInfo'
 import Home from './pages/homepage'
 
+import EditProfile from './pages/patient/EditProfile'
+import DocProfile from './pages/doctor/DocProfile'
+import EditAdminProfile from './pages/admin/AdminEditProfile'
+import PatientDetails from './pages/role-pages/patientDetails'
+import DoctorProfessionalInfo from './pages/role-pages/DoctorProfessionalInfo'
+import DoctorPracticeDetails from './pages/role-pages/DoctorPracticeDetails'
+import DoctorVerificationDocs from './pages/role-pages/DoctorVerificationDocs'
+import AdminDetails from './pages/role-pages/adminDetails'
 
 function App() {
   return (
@@ -62,7 +71,9 @@ function App() {
         <Route path="/doc-messages" element={<DocMessages />} />
         <Route path="/doc-reminders" element={<DocReminders />} />
         <Route path="/doc-payments" element={<DocPayments />} />
+        <Route path="/doc-profile" element={<DocProfile />} />
         <Route path="/doc-past-sessions" element={<DocPastSessions />} />
+        <Route path="/edit-doc-profile" element={<EditDocProfile />} />
         <Route path="/admin-layout" element={<AdminLayout />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/admin-users" element={<AdminUsers />} />
@@ -73,8 +84,14 @@ function App() {
         <Route path="/admin-payments" element={<AdminPayments />} />
         <Route path="/admin-reports" element={<Reports />} />
         <Route path="/admin-profile" element={<AdminProfile />} />
-        <Route path="/symptom-checker" element={<SymptomChecker />} />
-        
+        <Route path="/edit-admin-profile" element={<EditAdminProfile />} />
+        <Route path="/symptom-checker" element={<SymptomInfo />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
+        <Route path="/patient-details" element={<PatientDetails />} />
+        <Route path="/admin-details" element={<AdminDetails />} />
+        <Route path="/doctor-professional-info" element={<DoctorProfessionalInfo />} />
+        <Route path="/doctor-practice-details" element={<DoctorPracticeDetails />} />
+        <Route path="/doctor-verification-docs" element={<DoctorVerificationDocs />} />
       </Routes>
     </Router>
   )

@@ -1,17 +1,24 @@
+// src/pages/Reminders.jsx
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import Layout from '../../components/Layout'
 import { FaBell, FaTrash, FaPlus } from 'react-icons/fa'
 import '../../page-css/Reminders.css'
 
 function Reminders() {
+  const location = useLocation()
+  const prefill = location.state?.prefill || null
+
   const [reminders, setReminders] = useState([
-    { id: 1, text: 'Doctor appointment', date: '2025-09-21', time: '10:30' },
+    { id: 1, text: 'Doctor appointment', date: '2025-09-24', time: '10:30' },
     { id: 2, text: 'Team meeting', date: '2025-09-22', time: '14:00' },
     { id: 3, text: 'Buy groceries', date: '2025-09-23', time: '18:30' },
   ])
-  const [newText, setNewText] = useState('')
-  const [newDate, setNewDate] = useState('')
-  const [newTime, setNewTime] = useState('')
+
+  const [newText, setNewText] = useState(prefill?.text || '')
+  const [newDate, setNewDate] = useState(prefill?.date || '')
+  const [newTime, setNewTime] = useState('') // always blank (user chooses)
+
   const token = localStorage.getItem('token')
 
   // Fetch existing reminders (API)
@@ -40,13 +47,13 @@ function Reminders() {
     if (!newText.trim() || !newDate || !newTime) return
 
     const reminder = {
-      id: Date.now(), // temporary id for UI
+      id: Date.now(),
       text: newText,
       date: newDate,
       time: newTime,
     }
 
-    setReminders([...reminders, reminder]) // show instantly
+    setReminders([...reminders, reminder])
 
     fetch('http://localhost:5000/api/reminders', {
       method: 'POST',
@@ -71,7 +78,7 @@ function Reminders() {
 
   // Delete reminder
   const deleteReminder = (id) => {
-    setReminders(reminders.filter((r) => r.id !== id)) // remove instantly
+    setReminders(reminders.filter((r) => r.id !== id))
 
     fetch(`http://localhost:5000/api/reminders/${id}`, {
       method: 'DELETE',
@@ -81,7 +88,7 @@ function Reminders() {
     }).catch(() => alert('Failed to delete reminder'))
   }
 
-  // --- Helper: Group reminders by Today / Tomorrow / Later ---
+  // Group reminders into Today / Tomorrow / Later
   const groupReminders = () => {
     const today = new Date()
     const tomorrow = new Date()

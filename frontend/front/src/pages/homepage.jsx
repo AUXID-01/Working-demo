@@ -22,7 +22,7 @@ const Home = () => {
   const styles = {
     container: { maxWidth: '1200px', margin: '0 auto', padding: '0 20px' },
     header: {
-      background: 'linear-gradient(135deg, #2c5aa0 0%, #4a90e2 100%)',
+      background: 'linear-gradient(135deg, #16685E 0%, #0d4c42 100%)',
       color: 'white',
       padding: '1rem 0',
       boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
@@ -53,7 +53,7 @@ const Home = () => {
       transition: 'all 0.3s ease',
       fontSize: '14px',
     },
-    btnPrimary: { background: 'white', color: '#2c5aa0' },
+    btnPrimary: { background: 'white', color: '#16685E' },
     btnSecondary: {
       background: 'transparent',
       color: 'white',
@@ -61,19 +61,19 @@ const Home = () => {
     },
     btnLarge: { padding: '18px 36px', fontSize: '18px', borderRadius: '30px' },
     hero: {
-      background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
+      background: 'linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%)',
       padding: '80px 0',
       textAlign: 'center',
     },
     heroTitle: {
       fontSize: '3rem',
-      color: '#2c5aa0',
+      color: '#16685E',
       marginBottom: '20px',
       fontWeight: '700',
     },
     heroText: {
       fontSize: '1.3rem',
-      color: '#6c757d',
+      color: '#0d4c42',
       marginBottom: '40px',
       maxWidth: '600px',
       marginLeft: 'auto',
@@ -86,7 +86,7 @@ const Home = () => {
       flexWrap: 'wrap',
     },
     stats: {
-      background: 'linear-gradient(135deg, #2c5aa0 0%, #4a90e2 100%)',
+      background: 'linear-gradient(135deg, #16685E 0%, #0d4c42 100%)',
       color: 'white',
       padding: '60px 0',
       textAlign: 'center',
@@ -103,7 +103,7 @@ const Home = () => {
     mainContent: { padding: '80px 0' },
     sectionTitle: {
       fontSize: '2.5rem',
-      color: '#2c5aa0',
+      color: '#16685E',
       marginBottom: '30px',
       textAlign: 'center',
       fontWeight: 'bold',
@@ -128,7 +128,7 @@ const Home = () => {
       padding: '30px',
       borderRadius: '15px',
       boxShadow: '0 5px 20px rgba(0,0,0,0.08)',
-      borderLeft: '5px solid #27ae60',
+      borderLeft: '5px solid #16685E',
       transition: 'transform 0.3s ease',
       cursor: 'pointer',
     },
@@ -141,11 +141,11 @@ const Home = () => {
     },
     cardIcon: { marginRight: '10px', fontSize: '1.5rem' },
     problemTitle: { color: '#e74c3c' },
-    solutionTitle: { color: '#27ae60' },
-    cardText: { color: '#666', lineHeight: '1.6' },
-    solutionSection: { background: '#f8f9fa', padding: '80px 0' },
+    solutionTitle: { color: '#16685E' },
+    cardText: { color: '#0d4c42', lineHeight: '1.6' },
+    solutionSection: { background: '#e9ecef', padding: '80px 0' },
     footer: {
-      background: '#343a40',
+      background: '#0d4c42',
       color: 'white',
       textAlign: 'center',
       padding: '40px 0',
@@ -168,7 +168,7 @@ const Home = () => {
                 style={{ ...styles.btn, ...styles.btnSecondary }}
                 onMouseEnter={(e) => {
                   e.target.style.background = 'white'
-                  e.target.style.color = '#2c5aa0'
+                  e.target.style.color = '#16685E'
                   e.target.style.transform = 'translateY(-2px)'
                 }}
                 onMouseLeave={(e) => {
@@ -183,7 +183,7 @@ const Home = () => {
                 onClick={handleRegister}
                 style={{ ...styles.btn, ...styles.btnPrimary }}
                 onMouseEnter={(e) => {
-                  e.target.style.background = '#f8f9fa'
+                  e.target.style.background = '#e9ecef'
                   e.target.style.transform = 'translateY(-2px)'
                   e.target.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)'
                 }}
@@ -217,14 +217,14 @@ const Home = () => {
                 ...styles.btnLarge,
               }}
               onMouseEnter={(e) => {
-                e.target.style.background = '#1e3f73'
+                e.target.style.background = '#16685E'
                 e.target.style.color = 'white'
                 e.target.style.transform = 'translateY(-2px)'
                 e.target.style.boxShadow = '0 8px 20px rgba(0,0,0,0.2)'
               }}
               onMouseLeave={(e) => {
                 e.target.style.background = 'white'
-                e.target.style.color = '#2c5aa0'
+                e.target.style.color = '#16685E'
                 e.target.style.transform = 'translateY(0)'
                 e.target.style.boxShadow = 'none'
               }}
@@ -237,17 +237,17 @@ const Home = () => {
                 ...styles.btn,
                 ...styles.btnSecondary,
                 ...styles.btnLarge,
-                color: '#2c5aa0',
-                border: '2px solid #2c5aa0',
+                color: '#16685E',
+                border: '2px solid #16685E',
               }}
               onMouseEnter={(e) => {
-                e.target.style.background = '#2c5aa0'
+                e.target.style.background = '#16685E'
                 e.target.style.color = 'white'
                 e.target.style.transform = 'translateY(-2px)'
               }}
               onMouseLeave={(e) => {
                 e.target.style.background = 'transparent'
-                e.target.style.color = '#2c5aa0'
+                e.target.style.color = '#16685E'
                 e.target.style.transform = 'translateY(0)'
               }}
             >

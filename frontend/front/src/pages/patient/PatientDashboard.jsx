@@ -1,6 +1,9 @@
 // src/pages/Dashboard.jsx
 import React, { useState, useEffect } from 'react'
 import Layout from '../../components/Layout'
+import { useNavigate } from 'react-router-dom'
+
+
 import {
   FaCalendarAlt,
   FaUserMd,
@@ -12,6 +15,7 @@ import {
   FaHeartbeat,
   FaCalendarCheck,
   FaAmbulance,
+  FaFileUpload,
 } from 'react-icons/fa'
 
 function Dashboard() {
@@ -19,6 +23,8 @@ function Dashboard() {
   const [appointments, setAppointments] = useState([])
   const [loadingAppointments, setLoadingAppointments] = useState(true)
   const token = localStorage.getItem('token')
+  const navigate = useNavigate()
+  const [filter, setFilter] = useState('All') // setFilter comes from here
 
   // Fetch user
   useEffect(() => {
@@ -150,30 +156,98 @@ function Dashboard() {
           </h3>
           <div className="card-content">
             <p>Your health matters</p>
-            <button className="btn">Start</button>
+            <button
+              className="btn"
+              onClick={() => navigate('/symptom-checker')}
+            >
+              Start
+            </button>
           </div>
         </div>
 
         {/* Quick Actions */}
         <div className="card quick-actions">
-          <h3>
-            <FaCalendarAlt /> Quick Actions
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <FaCalendarAlt />
+            Quick Actions
           </h3>
           <div className="card-content">
-            <ul>
-              <li>⭕ Book Appointment</li>
-              <li>📤 Upload Report</li>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li>
+                <button
+                  onClick={() => navigate('/doctors')}
+                  style={{
+                    background: '#16685E',
+                    color: 'white',
+                    border: 'none',
+                    padding: '10px 16px',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    width: '100%',
+                    textAlign: 'left',
+                    marginBottom: '10px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = '#0d4c42'
+                    e.target.style.transform = 'translateY(-2px)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = '#16685E'
+                    e.target.style.transform = 'translateY(0)'
+                  }}
+                >
+                  <FaCalendarAlt />
+                  Book Appointment
+                </button>
+              </li>
+              <li>
+                <button
+                  className="btn-outline"
+                  onClick={() => {
+                    const section = document.getElementById('upload-section')
+                    if (section) {
+                      setFilter('Old Reports') // Make sure Old Reports tab is active
+                      setTimeout(
+                        () => section.scrollIntoView({ behavior: 'smooth' }),
+                        100
+                      )
+                    }
+                  }}
+                  style={{
+                    background: '#16685E',
+                    color: 'white',
+                    border: 'none',
+                    padding: '10px 16px',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                    width: '100%',
+                    textAlign: 'left',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = '#0d4c42'
+                    e.target.style.transform = 'translateY(-2px)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = '#16685E'
+                    e.target.style.transform = 'translateY(0)'
+                  }}
+                  onClick={() =>
+                    navigate('/records', { state: { scrollToUpload: true } })
+                  }
+                >
+                  <FaFileUpload />
+                  Go to Upload Reports
+                </button>
+              </li>
             </ul>
-          </div>
-        </div>
-
-        {/* Emergency */}
-        <div className="card emergency">
-          <h3>
-            <FaAmbulance /> Emergency
-          </h3>
-          <div className="card-content">
-            <p>Call your nearest hospital in case of emergency.</p>
           </div>
         </div>
       </section>

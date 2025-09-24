@@ -115,12 +115,10 @@
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 0.7rem;
   height: 550px;
-  background-color: #ffffff;
-  border-radius:25px;
 }
 
 .card {
-  background: #F5F4F7;
+  background: #ffffff;
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -415,3 +413,4 @@
   display: block;
   margin: 1px;
 }
+

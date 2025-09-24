@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+// src/pages/Records.jsx
+import React, { useState, useEffect } from 'react'
 import Layout from '../../components/Layout'
+import { useLocation } from 'react-router-dom'
 import '../../page-css/Records.css'
 
 const dummyRecords = [
@@ -30,19 +32,53 @@ const dummyRecords = [
 ]
 
 function Records() {
+  const location = useLocation()
   const [filter, setFilter] = useState('All')
+  const [oldReports, setOldReports] = useState([])
 
   const filteredRecords =
     filter === 'All'
       ? dummyRecords
+      : filter === 'Old Reports'
+      ? oldReports
       : dummyRecords.filter((rec) => rec.type === filter)
+
+  // Handle file upload
+  const handleUpload = (event) => {
+    const file = event.target.files[0]
+    if (file) {
+      const newReport = {
+        id: Date.now(),
+        type: 'Old Report',
+        title: file.name,
+        doctor: 'Uploaded by You',
+        date: new Date().toISOString().split('T')[0],
+        file: URL.createObjectURL(file),
+      }
+      setOldReports([...oldReports, newReport])
+    }
+  }
+
+  // Scroll to upload section if navigated from Dashboard
+ const scrollToUpload = location.state?.scrollToUpload
+
+ useEffect(() => {
+   if (scrollToUpload) {
+     setFilter('Old Reports') // Activate Old Reports tab
+     setTimeout(() => {
+       const section = document.getElementById('upload-section')
+       if (section) section.scrollIntoView({ behavior: 'smooth' })
+     }, 100)
+   }
+ }, [scrollToUpload])
+
 
   return (
     <Layout title="Records" subtitle="Your prescriptions and test reports">
       <div className="records-page">
         {/* Filter bar */}
         <div className="filter-bar">
-          {['All', 'Prescription', 'Test Report'].map((f) => (
+          {['All', 'Prescription', 'Test Report', 'Old Reports'].map((f) => (
             <button
               key={f}
               className={`filter-btn ${filter === f ? 'active' : ''}`}
@@ -52,6 +88,22 @@ function Records() {
             </button>
           ))}
         </div>
+
+        {/* Upload section */}
+        {filter === 'Old Reports' && (
+          <div id="upload-section" className="upload-section">
+            <label htmlFor="upload-input" className="btn-outline upload-btn">
+              Upload Old Report
+            </label>
+            <input
+              id="upload-input"
+              type="file"
+              accept=".pdf,.jpg,.png"
+              style={{ display: 'none' }}
+              onChange={handleUpload}
+            />
+          </div>
+        )}
 
         {/* Records list */}
         <div className="records-container">
@@ -75,7 +127,6 @@ function Records() {
               </div>
             </div>
           ))}
-
           {filteredRecords.length === 0 && (
             <p className="no-records">No records available</p>
           )}

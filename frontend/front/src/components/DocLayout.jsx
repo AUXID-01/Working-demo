@@ -49,7 +49,9 @@ function DocLayout({ title, subtitle, children }) {
       <aside className="sidebar">
         <div>
           <div className="logo">
-            <img src={Logo} alt="Jeevia Logo" />
+            <Link to="/doc-dashboard">
+              <img src={Logo} alt="Jeevia Logo" />
+            </Link>
           </div>
 
           <div className="search-box">

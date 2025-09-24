@@ -1,12 +1,28 @@
-/* Center the profile page */
+/* Page background wrapper */
+.page-background {
+  min-height: 100vh;
+  min-width: 100vw;
+  background: url('../assets/pd.svg') center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Reset body */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Profile container */
 .profile-page {
+  max-width: 500px;
+  width: 90%; /* responsive for smaller screens */
   padding: 2rem;
-  background: #fff;
+  background-color: #fff; /* white card */
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin: 2rem auto;       /* center horizontally */
-  max-width: 500px;        /* prevent it from being too wide */
-  text-align: left;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  position: relative; /* for back button */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,11 +30,11 @@
 
 /* Title */
 .page-title {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #1a202c;
+  font-size: 1.75rem;
+  font-weight: 700;
   margin-bottom: 1.5rem;
-  text-align: center; /* center title */
+  text-align: center;
+  color: #1f2937; /* dark gray */
 }
 
 /* Profile info section */
@@ -50,20 +66,47 @@
 .profile-buttons {
   display: flex;
   gap: 1rem;
-  justify-content: center; /* center buttons under profile */
+  justify-content: center;
 }
 
 .btn {
-  padding: 0.6rem 1.2rem;
+  background-color: #16685E;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  font-weight: 500;
-  transition: 0.2s;
-  background: #16a34a; /* green theme */
-  color: #fff;
+  transition: background-color 0.2s, transform 0.1s;
 }
 
 .btn:hover {
-  background: #15803d; /* darker green on hover */
+  background-color: #0d4c42;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Back button */
+.back-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #16685E;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  background: #0d4c42;
 }

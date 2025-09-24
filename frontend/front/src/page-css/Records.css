@@ -106,3 +106,28 @@
   font-size: 0.9rem;
   margin-top: 20px;
 }
+
+/* Upload section */
+.upload-section {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.upload-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #16685e;
+  border-radius: 6px;
+  background: #f8fdfc;
+  color: #16685e;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.upload-btn:hover {
+  background: #16685e;
+  color: #fff;
+}

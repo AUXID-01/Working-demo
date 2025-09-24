@@ -9,13 +9,40 @@ import {
   FaEnvelope,
   FaHeartbeat,
   FaCalendarCheck,
+  FaUpload,
+  FaUserPlus,
 } from 'react-icons/fa'
+
+import { useNavigate } from 'react-router-dom'
 
 function DocDashboard() {
   const [doctor, setDoctor] = useState(null)
   const [appointments, setAppointments] = useState([])
   const [loadingAppointments, setLoadingAppointments] = useState(true)
   const token = localStorage.getItem('token')
+  const buttonStyle = {
+    background: '#16685E',
+    color: 'white',
+    border: 'none',
+    padding: '10px 16px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    width: '100%',
+    textAlign: 'left',
+    marginBottom: '10px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    transition: 'all 0.3s ease',
+  }
+
+   const navigate = useNavigate()
+
+  const hoverEffect = (e, isHover) => {
+    e.target.style.background = isHover ? '#0d4c42' : '#16685E'
+    e.target.style.transform = isHover ? 'translateY(-2px)' : 'translateY(0)'
+  }
+
 
   // Fetch doctor info
   useEffect(() => {
@@ -125,17 +152,37 @@ function DocDashboard() {
 
         {/* Quick Actions */}
         <div className="card quick-actions">
-          <h3>
-            <FaCalendarAlt /> Quick Actions
+          <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <FaCalendarAlt />
+            Quick Actions
           </h3>
           <div className="card-content">
-            <ul>
-              <li>⭕ Add Patient Record</li>
-              <li>📤 Send Message</li>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li>
+                <button
+                  onClick={() => navigate('/doc-reminders')}
+                  style={buttonStyle}
+                  onMouseEnter={(e) => hoverEffect(e, true)}
+                  onMouseLeave={(e) => hoverEffect(e, false)}
+                >
+                  <FaBell />
+                  Set Reminder
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => navigate('/doc-records')}
+                  style={buttonStyle}
+                  onMouseEnter={(e) => hoverEffect(e, true)}
+                  onMouseLeave={(e) => hoverEffect(e, false)}
+                >
+                  <FaUserPlus />
+                  Add Patient Record
+                </button>
+              </li>
             </ul>
           </div>
         </div>
-
       </section>
     </DocLayout>
   )

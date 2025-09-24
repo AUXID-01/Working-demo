@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import DocLayout from '../../components/DocLayout'
 import '../../page-css/Appointments.css'
 
-// Dummy appointments for demonstration
+// Dummy appointments
 const dummyAppointments = [
   {
     id: 1,
@@ -51,99 +51,136 @@ const dummyAppointments = [
 function DocAppointments() {
   const [appointments, setAppointments] = useState([])
   const [loading, setLoading] = useState(true)
+  const [filter, setFilter] = useState('All')
   const navigate = useNavigate()
 
-  // Simulate API load
   useEffect(() => {
     setLoading(true)
     setTimeout(() => {
-      setAppointments(dummyAppointments)
+      const updated = dummyAppointments.map((appt) => ({
+        ...appt,
+        status: getStatus(appt.date, appt.time),
+      }))
+      setAppointments(updated)
       setLoading(false)
     }, 500)
   }, [])
 
-  // Dates for filtering
+  const getStatus = (apptDate, apptTime) => {
+    const now = new Date()
+    const [hours, minutes] = apptTime.split(/[: ]/).map(Number)
+    const isPM = apptTime.toLowerCase().includes('pm')
+    const apptHour = isPM && hours < 12 ? hours + 12 : hours
+    const apptDateTime = new Date(apptDate)
+    apptDateTime.setHours(apptHour, minutes, 0)
+
+    if (apptDateTime < now) {
+      return Math.random() > 0.5 ? 'Completed' : 'Missed'
+    }
+    return 'Upcoming'
+  }
+
+  const handleJoin = (id) => navigate(`/doc-appointments/${id}/join`)
+
+  const filteredAppointments =
+    filter === 'All'
+      ? appointments
+      : appointments.filter((a) => a.status === filter)
+
   const today = new Date().toISOString().split('T')[0]
   const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
     .toISOString()
     .split('T')[0]
 
-  const todayAppointments = appointments.filter((a) => a.date === today)
-  const tomorrowAppointments = appointments.filter((a) => a.date === tomorrow)
-  const laterAppointments = appointments.filter(
-    (a) => a.date !== today && a.date !== tomorrow
-  )
-
-  const handleJoin = (id) => {
-    navigate(`/doc-appointments/${id}/join`)
+  const divideUpcoming = (list) => {
+    return {
+      today: list.filter((a) => a.date === today),
+      tomorrow: list.filter((a) => a.date === tomorrow),
+      later: list.filter((a) => a.date !== today && a.date !== tomorrow),
+    }
   }
 
-  // Render helper
-  const renderAppointments = (title, list) => (
-    <div className="appointments-section">
-      <h3>{title}</h3>
-      {list.length === 0 ? (
-        <p className="no-appointments">No {title.toLowerCase()} appointments</p>
-      ) : (
-        <ul className="appointments-list">
-          {list.map((appt) => (
-            <li key={appt.id} className="appointment-card">
-              <div className="appointment-header">
-                <h4>{appt.type}</h4>
-                <div className="appointment-meta">
-                  <span
-                    className={`mode-badge ${appt.mode
-                      .toLowerCase()
-                      .replace(' ', '-')}`}
-                  >
-                    {appt.mode}
-                  </span>
-                  <span className="appointment-date">{appt.date}</span>
-                </div>
-              </div>
+  const renderAppointmentsList = (list) =>
+    list.length === 0 ? (
+      <p className="no-appointments">No appointments here</p>
+    ) : (
+      list.map((appt) => (
+        <li key={appt.id} className="appointment-card">
+          <div className="appointment-header">
+            <h4>{appt.type}</h4>
+            <div className="appointment-meta">
+              <span
+                className={`mode-badge ${appt.mode
+                  .toLowerCase()
+                  .replace(' ', '-')}`}
+              >
+                {appt.mode}
+              </span>
+              <span className="appointment-date">{appt.date}</span>
+              <span className={`status-badge ${appt.status.toLowerCase()}`}>
+                {appt.status}
+              </span>
+            </div>
+          </div>
+          <div className="appointment-details">
+            <p>
+              <strong>Patient:</strong> {appt.patientName}
+            </p>
+            <p>
+              <strong>Time:</strong> {appt.time}
+            </p>
+            <p>
+              <strong>Location:</strong> {appt.location}
+            </p>
+            <p className="notes">
+              <strong>Notes:</strong> {appt.notes}
+            </p>
+          </div>
+          {appt.mode === 'Online' && appt.status === 'Upcoming' && (
+            <button className="join-btn" onClick={() => handleJoin(appt.id)}>
+              Join Meeting
+            </button>
+          )}
+        </li>
+      ))
+    )
 
-              <div className="appointment-details">
-                <p>
-                  <strong>Patient:</strong> {appt.patientName}
-                </p>
-                <p>
-                  <strong>Time:</strong> {appt.time}
-                </p>
-                <p>
-                  <strong>Location:</strong> {appt.location}
-                </p>
-                <p className="notes">
-                  <strong>Notes:</strong> {appt.notes}
-                </p>
-              </div>
-
-              {appt.mode === 'Online' && (
-                <button
-                  className="join-btn"
-                  onClick={() => handleJoin(appt.id)}
-                >
-                  Join Meeting
-                </button>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  )
+  const renderUpcomingSections = (list) => {
+    const { today, tomorrow, later } = divideUpcoming(list)
+    return (
+      <>
+        <h3>Today</h3>
+        {renderAppointmentsList(today)}
+        <h3>Tomorrow</h3>
+        {renderAppointmentsList(tomorrow)}
+        <h3>Later</h3>
+        {renderAppointmentsList(later)}
+      </>
+    )
+  }
 
   return (
     <DocLayout title="Appointments" subtitle="Your scheduled patient visits">
       <div className="appointments-container no-top-gap">
-        <h2>Upcoming Appointments</h2>
+        <h2>Filter by Status:</h2>
+        <div className="filter-buttons">
+          {['All', 'Upcoming', 'Completed', 'Missed'].map((f) => (
+            <button
+              key={f}
+              className={`filter-btn ${filter === f ? 'active' : ''}`}
+              onClick={() => setFilter(f)}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+
         {loading ? (
           <p className="loading-text">Loading...</p>
+        ) : filter === 'Upcoming' ? (
+          renderUpcomingSections(filteredAppointments)
         ) : (
-          <>
-            {renderAppointments('Today', todayAppointments)}
-            {renderAppointments('Tomorrow', tomorrowAppointments)}
-            {renderAppointments('Later', laterAppointments)}
-          </>
+          renderAppointmentsList(filteredAppointments)
         )}
       </div>
     </DocLayout>

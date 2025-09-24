@@ -1,94 +1,74 @@
-// src/pages/admin/AdminProfile.jsx
-import React, { useState, useEffect } from 'react'
-import AdminLayout from '../../components/adminLayout'
+// src/pages/AdminProfile.jsx
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import '../../page-css/AdminProfile.css'
+import '../../page-css/Profile.css'
 
-function AdminProfile() {
-  const [admin, setAdmin] = useState(null)
+const AdminProfile = () => {
   const navigate = useNavigate()
-  const token = localStorage.getItem('token')
 
-  useEffect(() => {
-    if (!token) return
-
-    const fetchAdmin = async () => {
-      try {
-        const res = await fetch('http://localhost:5000/api/admin/me', {
-          headers: { Authorization: 'Bearer ' + token },
-        })
-        const data = await res.json()
-        setAdmin(data)
-      } catch (err) {
-        console.error(err)
-      }
-    }
-
-    fetchAdmin()
-  }, [token])
+  // Mock admin data (replace with API later)
+  const admin = {
+    name: 'Admin User',
+    age: 30,
+    email: 'admin@gmail.com',
+    contact: '+91 98765 43210',
+    role: 'Administrator',
+  }
 
   const handleLogout = () => {
     localStorage.removeItem('token')
-    navigate('/login') // redirect to login
+    navigate('/login')
   }
 
   const handleEdit = () => {
-    navigate('/admin-edit-profile') // redirect to admin edit page
+    navigate('/edit-admin-profile')
+  }
+
+  const handleBack = () => {
+    navigate('/admin-dashboard')
   }
 
   return (
-    <AdminLayout title="Profile" subtitle="Manage your admin account">
-      <div className="profile-container">
-        <div className="profile-card">
-          {/* Avatar */}
-          <div className="avatar">
-            {admin?.name
-              ? admin.name
-                  .split(' ')
-                  .map((n) => n[0])
-                  .join('')
-                  .toUpperCase()
-              : 'A'}
+    <div className="page-background">
+      <button className="back-btn" onClick={handleBack}>
+        Back
+      </button>
+      <div className="profile-page">
+        <h1 className="page-title">My Profile</h1>
+
+        <div className="profile-info">
+          <div className="info-item">
+            <span className="label">Name:</span>
+            <span className="value">{admin.name}</span>
           </div>
-
-          {/* Name & Role */}
-          <h2>{admin?.name || 'Admin'}</h2>
-          <p className="profile-role">ADMIN</p>
-
-          {/* Details Section */}
-          <div className="profile-info">
-            <div>
-              <strong>Name:</strong> {admin?.name || 'N/A'}
-            </div>
-            <div>
-              <strong>Email:</strong> {admin?.email || 'N/A'}
-            </div>
-            <div>
-              <strong>Contact:</strong> {admin?.contact || 'N/A'}
-            </div>
-            <div>
-              <strong>Age:</strong> {admin?.age || 'N/A'}
-            </div>
-            <div>
-              <strong>Gender:</strong> {admin?.gender || 'N/A'}
-            </div>
-            <div>
-              <strong>Role:</strong> {admin?.role || 'ADMIN'}
-            </div>
+          <div className="info-item">
+            <span className="label">Age:</span>
+            <span className="value">{admin.age}</span>
           </div>
-
-          {/* Actions */}
-          <div className="profile-actions">
-            <button className="btn edit-btn" onClick={handleEdit}>
-              Edit Details
-            </button>
-            <button className="btn logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
+          <div className="info-item">
+            <span className="label">Email:</span>
+            <span className="value">{admin.email}</span>
+          </div>
+          <div className="info-item">
+            <span className="label">Contact:</span>
+            <span className="value">{admin.contact}</span>
+          </div>
+          <div className="info-item">
+            <span className="label">Role:</span>
+            <span className="value">{admin.role}</span>
           </div>
         </div>
+
+        <div className="profile-buttons">
+          <button className="btn primary" onClick={handleEdit}>
+            Edit Details
+          </button>
+          <button className="btn danger" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
       </div>
-    </AdminLayout>
+    </div>
   )
 }
 

@@ -150,3 +150,60 @@
 .join-btn:hover {
   background: #12534a;
 }
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  padding: 6px 12px;
+  border: 1px solid #16685E;
+  background: white;
+  color: #16685E;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #16685E;
+  color: white;
+}
+
+.status-badge.completed {
+  background-color: #28a745;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.status-badge.upcoming {
+  background-color: #ffc107;
+  color: black;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.status-badge.missed {
+  background-color: #dc3545;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+
+/* Upcoming sections headings */
+.appointments-container h3 {
+  color: black; /* Change from white to black */
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+

@@ -12,7 +12,7 @@
 /* Appointment Form Card */
 .appointment-form {
   width: 100%;
-  max-width: 450px;
+  max-width: 600px;
   background: #ffffff;
   padding: 32px 28px;
   border-radius: 18px;
@@ -78,8 +78,11 @@ textarea {
 }
 
 /* Submit Button */
+/* Submit Button */
 .btn {
-  display: block;
+  display: flex;              /* use flex to center content */
+  justify-content: center;    /* center horizontally */
+  align-items: center;        /* center vertically */
   width: 100%;
   background-color: #1ca59a;
   color: #fff;
@@ -95,6 +98,9 @@ textarea {
 .btn:hover {
   background-color: #178a81;
   transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
 }
 
 /* Back Button */
@@ -120,4 +126,48 @@ textarea {
   .appointment-form {
     padding: 24px 20px;
   }
+}
+
+/* For modern browsers */
+.select-input {
+  appearance: none; /* remove default arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='5'><path fill='black' d='M0 0l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px 5px;
+}
+
+.select-input:focus {
+  outline: none;
+  border-color: #1ed1c2;
+}
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.select-input {
+  width: 100%;
+  padding: 8px 35px 8px 12px; /* space for icon on right */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  appearance: none;
+  background-color: white;
+}
+
+.select-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* allows clicking select without obstruction */
+  color: black;
 }

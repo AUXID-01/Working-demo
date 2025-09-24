@@ -239,21 +239,7 @@
   position: relative;
 }
 
-.eye-icon {
-  position: absolute;
-  right: 10px;
-  top: 45%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-}
 
-.eye-icon:hover {
-  opacity: 1;
-}
 
 /* Gender Dropdown styling */
 .input-group select {
@@ -286,4 +272,92 @@
   color: #0B463F;
   margin-bottom: 6px;
   display: block;
+}
+
+/* Password field container */
+.password-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* The eye icon */
+.eye-icon {
+  position: absolute;
+  right: 15px;
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+/* Hover effect for better UX */
+.eye-icon:hover {
+  color: #00695c;
+}
+
+.input-group .icon {
+  transform: none; /* reset any inherited flipping */
+}
+
+.input-group.phone-icon .icon {
+  rotate: 90deg;
+}
+
+/* Textarea Styling */
+.input-group textarea {
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+  font-size: 1rem;
+  color: #000;
+  resize: vertical; /* allow resizing vertically only */
+  min-height: 60px;
+  max-height: 150px;
+}
+
+/* Error messages */
+.error-message {
+  color: #e53935;  /* red */
+  font-size: 0.9rem;
+  margin: -5px 0 10px 5px;
+  font-weight: 500;
+}
+
+/* Success messages */
+.success-message {
+  color: #2e7d32; /* green */
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* Larger input-group for textareas */
+.input-group.textarea-group {
+  align-items: flex-start;
+  padding: 1rem;
+}
+
+.input-group.textarea-group .icon {
+  margin-top: 4px; /* align icon with top of textarea */
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border: none;
+  outline: none;
+}
+
+.input-group:focus-within {
+  border: 1px solid #00b894; /* green border on focus */
+  box-shadow: 0 0 6px rgba(0, 184, 148, 0.4);
+}
+
+.input-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #444;
 }

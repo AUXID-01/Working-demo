@@ -1,5 +1,6 @@
 // src/pages/Medicines.jsx
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Layout from '../../components/Layout'
 import '../../page-css/Medicines.css'
 
@@ -12,6 +13,7 @@ const dummyMedicines = [
     duration: '7 days',
     doctor: 'Dr. Sharma',
     status: 'Active',
+    lastTaken: null,
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const dummyMedicines = [
     duration: '5 days',
     doctor: 'Dr. Roy',
     status: 'Active',
+    lastTaken: null,
   },
   {
     id: 3,
@@ -30,19 +33,42 @@ const dummyMedicines = [
     duration: '30 days',
     doctor: 'Dr. Mehta',
     status: 'Completed',
+    lastTaken: null,
   },
 ]
 
 function Medicines() {
   const [medicines, setMedicines] = useState(dummyMedicines)
+  const navigate = useNavigate()
+
+  // Ask for notification permission once
+  useEffect(() => {
+    if ('Notification' in window) {
+      Notification.requestPermission()
+    }
+  }, [])
 
   const markTaken = (id) => {
-    console.log(`Medicine ${id} marked as taken`)
-    // you can update state if needed
+    setMedicines((prev) =>
+      prev.map((med) =>
+        med.id === id ? { ...med, lastTaken: new Date().toLocaleString() } : med
+      )
+    )
   }
 
+  // 🚀 Redirect to Reminders page with medicine prefilled
   const setReminder = (id) => {
-    console.log(`Reminder set for medicine ${id}`)
+    const med = medicines.find((m) => m.id === id)
+    if (!med) return
+
+    navigate('/reminders', {
+      state: {
+        prefill: {
+          text: `Take ${med.name} (${med.dosage})`,
+          date: new Date().toISOString().split('T')[0], // default today
+        },
+      },
+    })
   }
 
   return (
@@ -62,6 +88,9 @@ function Medicines() {
               <span className={`status-badge ${med.status.toLowerCase()}`}>
                 {med.status}
               </span>
+              {med.lastTaken && (
+                <p className="last-taken">Last taken: {med.lastTaken}</p>
+              )}
             </div>
             <div className="medicine-actions">
               {med.status === 'Active' ? (

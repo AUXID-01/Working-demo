@@ -1,5 +1,5 @@
 // src/pages/DocRecords.jsx
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import DocLayout from '../../components/DocLayout'
 import '../../page-css/Records.css'
 
@@ -39,19 +39,26 @@ const dummyRecords = [
 ]
 
 function DocRecords() {
-  const [filterPatient, setFilterPatient] = useState('All Patients')
   const [filterType, setFilterType] = useState('All Records')
+  const [searchTerm, setSearchTerm] = useState('')
 
-  // extract unique patient names for filter dropdown
-  const patients = ['All Patients', ...new Set(dummyRecords.map((r) => r.patient))]
   const types = ['All Records', ...new Set(dummyRecords.map((r) => r.type))]
 
+  // BOTH filters combined
   const filteredRecords = dummyRecords.filter((rec) => {
-    const matchesPatient =
-      filterPatient === 'All Patients' || rec.patient === filterPatient
     const matchesType = filterType === 'All Records' || rec.type === filterType
-    return matchesPatient && matchesType
+    const matchesSearch = rec.patient
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+    return matchesType && matchesSearch
   })
+
+  const handleUpload = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      alert(`File "${file.name}" uploaded!`) // replace with actual upload logic
+    }
+  }
 
   return (
     <DocLayout
@@ -59,20 +66,27 @@ function DocRecords() {
       subtitle="View prescriptions and test reports"
     >
       <div className="records-page">
-        {/* Filter bar */}
-        <div className="filter-bar">
-          <select
-            value={filterPatient}
-            onChange={(e) => setFilterPatient(e.target.value)}
-            className="filter-select"
+        {/* Toolbar: reverse order here (search, type filter, upload) */}
+        <div
+          className="records-toolbar"
+          style={{ flexDirection: 'row-reverse' }}
+        >
+          {/* Upload Button */}
+          <label
+            htmlFor="upload-input-doc"
+            className="btn-outline upload-btn-doc"
           >
-            {patients.map((p) => (
-              <option key={p} value={p}>
-                {p}
-              </option>
-            ))}
-          </select>
+            Upload Record
+          </label>
+          <input
+            id="upload-input-doc"
+            type="file"
+            accept=".pdf,.jpg,.png"
+            style={{ display: 'none' }}
+            onChange={handleUpload}
+          />
 
+          {/* Type Filter */}
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
@@ -84,9 +98,18 @@ function DocRecords() {
               </option>
             ))}
           </select>
+
+          {/* Search Input */}
+          <input
+            type="text"
+            placeholder="Search by patient name..."
+            className="search-input"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
 
-        {/* Records list */}
+        {/* Records List */}
         <div className="records-container">
           {filteredRecords.length === 0 && (
             <p className="no-records">No records available</p>

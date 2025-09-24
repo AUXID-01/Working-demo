@@ -1,0 +1,218 @@
+.page-background {
+  min-height: 100vh;
+  background: #f7fafd;
+  padding-top: 30px;
+}
+
+.back-btn {
+  display: inline-block;
+  margin: 18px 0 0 24px;
+  color: #2673dd;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.container {
+  max-width: 400px;
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 15px;
+  padding: 32px 24px 28px 24px;
+  box-shadow: 0 4px 18px rgba(40,56,90,0.08),0 1.5px 3px rgba(60,100,180,0.03);
+}
+
+.title {
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: #22334d;
+  margin-bottom: 6px;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 8px 13px;
+  border-radius: 7px;
+  border: 1px solid #e3e9f1;
+  font-size: 1rem;
+  margin-top: 2px;
+  box-sizing: border-box;
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+input[type="number"]:focus {
+  border-color: #2673dd;
+  box-shadow: 0 0 0 2px rgba(38,115,221,0.11);
+}
+
+.sex-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.sex-buttons button {
+  flex: 1;
+  padding: 8px 0;
+  border: 2px solid #e3e9f1;
+  border-radius: 7px;
+  font-size: 1rem;
+  background: #f7fafd;
+  cursor: pointer;
+  transition: border-color 0.21s, background 0.21s;
+}
+
+.sex-buttons button.selected {
+  background: #ebf2ff;
+  border-color: #2673dd;
+}
+
+.btn {
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 8px;
+  font-size: 1.18rem;
+  font-weight: 700;
+  background: #2673dd;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 18px;
+  transition: background 0.25s;
+}
+
+.btn:disabled {
+  background: #c4d2ec;
+  cursor: not-allowed;
+}
+
+.result-box {
+  margin-top: 32px;
+  background: #eaf3fd;
+  border-radius: 8px;
+  padding: 18px;
+  color: #22334d;
+  box-shadow: 0 1.5px 8px rgba(60,100,180,0.04);
+}
+
+/* Human Model Section */
+.human-model-container {
+  margin: 0 auto 26px auto;
+  position: relative;
+  width: 260px;
+  min-height: 350px;
+}
+
+.human-body-img {
+  display: block;
+  width: 100%;
+}
+
+/* Selectable Body Area Highlight */
+.body-area {
+  position: absolute;
+  opacity: 0.25;
+  transition: opacity 0.26s, background 0.23s;
+  border: 1.8px solid transparent;
+}
+
+.body-area:hover {
+  opacity: 0.5;
+  background: #2673dd22;
+  border-color: #2673dd66;
+}
+
+.body-area.selected {
+  opacity: 0.8;
+  background: #2673dd33;
+  border-color: #2673dd99;
+}
+
+/* Slide-in Symptoms List Bar */
+.symptom-slide-select {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 330px;
+  background: #f8fafd;
+  box-shadow: -2px 0 11px rgba(38,115,221,0.14);
+  border-top-left-radius: 22px;
+  border-bottom-left-radius: 22px;
+  padding: 26px 24px 28px 24px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  animation: slideInBar 0.32s cubic-bezier(.78,.12,.15,1) forwards;
+}
+
+@keyframes slideInBar {
+  from { right: -340px; opacity: 0; }
+  to { right: 0; opacity: 1; }
+}
+
+.symptom-header {
+  font-size: 1.11rem;
+  font-weight: 700;
+  margin-bottom: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close-btn {
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #2673dd;
+  padding: 0 4px;
+}
+
+.symptom-list {
+  overflow-y: auto;
+  height: 62vh;
+}
+
+.symptom-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
+  font-size: 1.01rem;
+  color: #1f2a36;
+}
+
+.symptom-option input[type="checkbox"] {
+  margin-right: 13px;
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsive */
+@media (max-width: 499px) {
+  .container {
+    max-width: 98vw;
+    padding: 12vw 3vw 8vw 3vw;
+  }
+  .human-model-container {
+    width: 72vw;
+    min-height: 43vw;
+  }
+  .symptom-slide-select {
+    width: 94vw;
+    border-radius: 0;
+    padding: 15vw 5vw 10vw 5vw;
+  }
+}
