@@ -61,7 +61,7 @@ function Medicines() {
     const med = medicines.find((m) => m.id === id)
     if (!med) return
 
-    navigate('/reminders', {
+    navigate('/patient/reminders', {
       state: {
         prefill: {
           text: `Take ${med.name} (${med.dosage})`,

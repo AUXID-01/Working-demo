@@ -24,11 +24,11 @@ const EditAdminProfile = () => {
     // TODO: API call to save changes
     console.log('Updated admin data:', adminData)
     alert('Profile updated successfully!')
-    navigate('/admin-profile')
+    navigate('/admin/profile')
   }
 
   const handleCancel = () => {
-    navigate('/admin-profile')
+    navigate('/admin/profile')
   }
 
   return (

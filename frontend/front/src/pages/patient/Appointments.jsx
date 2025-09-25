@@ -78,7 +78,7 @@ function Appointments() {
     return 'Upcoming'
   }
 
-  const handleJoin = (id) => navigate(`/appointments/${id}/join`)
+  const handleJoin = (id) => navigate(`/patient/appointments/${id}/join`)
 
   const filteredAppointments =
     filter === 'All'

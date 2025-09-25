@@ -160,7 +160,7 @@ function DocDashboard() {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               <li>
                 <button
-                  onClick={() => navigate('/doc-reminders')}
+                  onClick={() => navigate('/doctor/reminders')}
                   style={buttonStyle}
                   onMouseEnter={(e) => hoverEffect(e, true)}
                   onMouseLeave={(e) => hoverEffect(e, false)}
@@ -171,7 +171,7 @@ function DocDashboard() {
               </li>
               <li>
                 <button
-                  onClick={() => navigate('/doc-records')}
+                  onClick={() => navigate('/doctor/records')}
                   style={buttonStyle}
                   onMouseEnter={(e) => hoverEffect(e, true)}
                   onMouseLeave={(e) => hoverEffect(e, false)}

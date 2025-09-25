@@ -21,11 +21,11 @@ const AdminProfile = () => {
   }
 
   const handleEdit = () => {
-    navigate('/edit-admin-profile')
+    navigate('/admin/edit/profile')
   }
 
   const handleBack = () => {
-    navigate('/admin-dashboard')
+    navigate('/admin/dashboard')
   }
 
   return (

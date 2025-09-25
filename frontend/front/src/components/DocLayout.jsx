@@ -49,7 +49,7 @@ function DocLayout({ title, subtitle, children }) {
       <aside className="sidebar">
         <div>
           <div className="logo">
-            <Link to="/doc-dashboard">
+            <Link to="/doctor/dashboard">
               <img src={Logo} alt="Jeevia Logo" />
             </Link>
           </div>
@@ -61,56 +61,56 @@ function DocLayout({ title, subtitle, children }) {
 
           <nav className="menu">
             <Link
-              to="/doc-dashboard"
-              className={location.pathname === '/doc-dashboard' ? 'active' : ''}
+              to="/doctor/dashboard"
+              className={location.pathname === '/doctor/dashboard' ? 'active' : ''}
             >
               <FaCalendarAlt /> Dashboard
             </Link>
             <Link
-              to="/doc-appointments"
+              to="/doctor/appointments"
               className={
-                location.pathname === '/doc-appointments' ? 'active' : ''
+                location.pathname === '/doctor/appointments' ? 'active' : ''
               }
             >
               <FaCalendarCheck /> Appointments
             </Link>
             <Link
-              to="/doc-patients"
-              className={location.pathname === '/doc-patients' ? 'active' : ''}
+              to="/doctor/patients"
+              className={location.pathname === '/doctor/patients' ? 'active' : ''}
             >
               <FaUserMd /> Patients
             </Link>
             <Link
-              to="/doc-records"
-              className={location.pathname === '/doc-records' ? 'active' : ''}
+              to="/doctor/records"
+              className={location.pathname === '/doctor/records' ? 'active' : ''}
             >
               <FaFileMedical /> Records
             </Link>
             <Link
-              to="/doc-messages"
-              className={location.pathname === '/doc-messages' ? 'active' : ''}
+              to="/doctor/messages"
+              className={location.pathname === '/doctor/messages' ? 'active' : ''}
             >
               <FaEnvelope /> Messages
             </Link>
             <Link
-              to="/doc-reminders"
-              className={location.pathname === '/doc-reminders' ? 'active' : ''}
+              to="/doctor/reminders"
+              className={location.pathname === '/doctor/reminders' ? 'active' : ''}
             >
               <FaBell /> Reminders
             </Link>
 
             {/* New menu items */}
             <Link
-              to="/doc-past-sessions"
+              to="/doctor/past-sessions"
               className={
-                location.pathname === '/doc-past-sessions' ? 'active' : ''
+                location.pathname === '/doctor/past-sessions' ? 'active' : ''
               }
             >
               <FaHistory /> Past Sessions
             </Link>
             <Link
-              to="/doc-payments"
-              className={location.pathname === '/doc-payments' ? 'active' : ''}
+              to="/doctor/payments"
+              className={location.pathname === '/doctor/payments' ? 'active' : ''}
             >
               <FaWallet /> Payments
             </Link>
@@ -129,7 +129,7 @@ function DocLayout({ title, subtitle, children }) {
         </div>
 
         {/* Profile Section */}
-        <Link to="/doc-profile" className="profile">
+        <Link to="/doctor/profile" className="profile">
           <div className="avatar-circle">
             {doctor?.name
               ? doctor.name

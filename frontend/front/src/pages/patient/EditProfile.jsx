@@ -23,11 +23,11 @@ const EditProfile = () => {
     // TODO: Call API to save changes
     console.log('Updated user data:', userData)
     alert('Profile updated successfully!')
-    navigate('/profile')
+    navigate('/patient/profile')
   }
 
   const handleCancel = () => {
-    navigate('/profile')
+    navigate('/patient/profile')
   }
 
   return (

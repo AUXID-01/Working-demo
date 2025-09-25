@@ -175,7 +175,7 @@ function Dashboard() {
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               <li>
                 <button
-                  onClick={() => navigate('/doctors')}
+                  onClick={() => navigate('/patient/doctors')}
                   style={{
                     background: '#16685E',
                     color: 'white',
@@ -240,7 +240,7 @@ function Dashboard() {
                     e.target.style.transform = 'translateY(0)'
                   }}
                   onClick={() =>
-                    navigate('/records', { state: { scrollToUpload: true } })
+                    navigate('/patient/records', { state: { scrollToUpload: true } })
                   }
                 >
                   <FaFileUpload />

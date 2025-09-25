@@ -1,54 +1,58 @@
-/* =========================
-   Global Reset & Base
-========================= */
+/* SymptomChecker.css */
+
+/* ---------- Page & Container ---------- */
 body {
+  font-family: "Poppins", sans-serif;
+  background: #f5f8fa;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  padding: 0;
 }
 
-/* =========================
-   Page Background
-========================= */
-.page-background {
-  min-height: 100vh;
-  min-width: 100vw;
-  background: url('../assets/pd.svg') center/cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* =========================
-   Container
-========================= */
+.page-background,
 .container {
-  max-width: 500px;
-  width: 90%;
-  padding: 2.5rem 2rem;
-  background-color: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-/* =========================
-   Title
-========================= */
-.title {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  color: #1f2937; /* dark gray */
+.container {
+  max-width: 900px;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* =========================
-   Form
-========================= */
+/* ---------- Back Button ---------- */
+.back-btn {
+  align-self: flex-start;
+  margin-bottom: 20px;
+  text-decoration: none;
+  color: #0e918c;
+  font-weight: 600;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Titles ---------- */
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #0e918c;
+}
+
+/* ---------- Forms ---------- */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 20px;
+  width: 100%;
 }
 
 .form-group {
@@ -56,130 +60,142 @@ body {
   flex-direction: column;
 }
 
-.form-group label {
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  color: #374151; /* medium gray */
-}
-
-/* Input fields */
-.form-group input {
-  width: 100%;
-  padding: 0.65rem 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 1rem;
-  background-color: #f9fafb;
-  color: #111827; /* dark text for readability */
-  box-sizing: border-box;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.form-group input:focus {
-  border-color: #16685e;
-  box-shadow: 0 0 0 2px rgba(22, 104, 94, 0.25);
-  outline: none;
-}
-
-/* Placeholder text */
-.form-group input::placeholder {
-  color: #6b7280; /* medium gray */
-  opacity: 1;
-}
-
-/* =========================
-   Buttons
-========================= */
-.btn {
-  background-color: #16685e;
-  color: #fff;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 8px;
+label {
   font-weight: 600;
+  margin-bottom: 8px;
+}
+
+input[type="number"] {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
   font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
 }
 
-.btn:hover {
-  background-color: #0d4c42;
-  transform: translateY(-1px);
+input[type="number"]:focus {
+  outline: none;
+  border-color: #0e918c;
+  box-shadow: 0 0 0 2px rgba(14, 145, 140, 0.2);
 }
 
-.btn:active {
-  transform: translateY(0);
-}
-
-.btn:disabled {
-  background: #e0e0e0;
-  cursor: not-allowed;
-}
-
-/* Sex selection buttons */
+/* ---------- Sex Buttons ---------- */
 .sex-buttons {
   display: flex;
-  gap: 10px;
-  margin-top: 8px;
+  gap: 12px;
 }
 
 .sex-buttons button {
   padding: 10px 20px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #f9f9f9;
+  background: #f5f8fa;
   cursor: pointer;
-  transition: 0.2s ease-in-out;
-  color: #111827;
-}
-
-.sex-buttons button:hover {
-  background: #44bfb1;
-  color: #fff;
+  font-weight: 600;
 }
 
 .sex-buttons button.selected {
-  background: #44bfb1;
-  border-color: #44bfb1;
-  font-weight: 600;
+  background: #0e918c;
   color: #fff;
+  border-color: #0e918c;
 }
 
-/* =========================
-   Result Box
-========================= */
-.result-box {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: #f3f4f6;
+/* ---------- Continue Button ---------- */
+.btn {
+  padding: 12px 25px;
   border-radius: 8px;
-  font-size: 0.95rem;
-  color: #111827;
-  line-height: 1.4;
-}
-
-/* =========================
-   Back Button
-========================= */
-.back-btn {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: #16685e;
-  color: #fff;
   border: none;
-  padding: 0.4rem 0.9rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  background: #0e918c;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease;
-  text-decoration: none;
-  width: 145px;
-  text-align: center;
+  transition: all 0.2s ease-in-out;
 }
 
-.back-btn:hover {
-  background: #0d4c42;
+.btn:hover:not(:disabled) {
+  background: #1ed1c2;
+}
+
+.btn:disabled {
+  background: #a1e1dd;
+  cursor: not-allowed;
+}
+
+/* ---------- Result Box ---------- */
+.result-box {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f0fdfd;
+  border: 1px solid #0e918c;
+  width: 100%;
+}
+
+.result-box p {
+  margin: 6px 0;
+}
+
+/* ---------- Condition Cards ---------- */
+.condition-card {
+  background: #f5f8fa;
+  border: 1px solid #ccc;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.condition-card:hover {
+  background: #e0f7f5;
+  border-color: #0e918c;
+}
+
+/* ---------- Tabs ---------- */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #f5f8fa;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tabs button.active {
+  background: #0e918c;
+  color: #fff;
+  border-color: #0e918c;
+}
+
+/* ---------- Tab Content ---------- */
+.tab-content {
+  background: #f0fdfd;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #0e918c;
+}
+
+/* ---------- Disclaimer ---------- */
+.disclaimer {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #d9534f;
+  font-weight: 600;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .tabs {
+    flex-wrap: wrap;
+  }
 }

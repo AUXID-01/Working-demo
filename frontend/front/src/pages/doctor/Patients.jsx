@@ -160,7 +160,7 @@ function Patients() {
                   <button
                     className="btn view"
                     onClick={() =>
-                      navigate(`/patients/${p.id}`, { state: { patient: p } })
+                      navigate(`/doctor/patients/${p.id}`, { state: { patient: p } })
                     }
                   >
                     View

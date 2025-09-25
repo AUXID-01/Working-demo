@@ -92,7 +92,7 @@ function BookAppointments() {
   return (
     <div className="appointment-page">
       {/* Back Button */}
-      <button className="back-btn" onClick={() => navigate('/doctors')}>
+      <button className="back-btn" onClick={() => navigate('/patient/doctors')}>
         ← Back to Doctors
       </button>
 

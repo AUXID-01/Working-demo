@@ -43,11 +43,11 @@ function Login() {
       // Assuming your backend sends `role` in the response
       const role = data.role // 'admin', 'doctor', 'patient'
       if (role === 'admin') {
-        navigate('/admin-dashboard')
+        navigate('/admin/dashboard')
       } else if (role === 'doctor') {
-        navigate('/doc-dashboard')
+        navigate('/doctor/dashboard')
       } else if (role === 'patient') {
-        navigate('/dashboard')
+        navigate('/patient/dashboard')
       } else {
         setError('Invalid role assigned.')
       }

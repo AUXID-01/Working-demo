@@ -39,6 +39,7 @@ function AdminDetails({ formData, onChange }) {
           <option value="">Select Role</option>
           <option value="super_admin">Super Admin</option>
           <option value="sub_admin">Sub Admin</option>
+          <option value="moderator">Moderator</option>
         </select>
       </div>
 

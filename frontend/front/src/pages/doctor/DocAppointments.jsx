@@ -80,7 +80,7 @@ function DocAppointments() {
     return 'Upcoming'
   }
 
-  const handleJoin = (id) => navigate(`/doc-appointments/${id}/join`)
+  const handleJoin = (id) => navigate(`/doctor/appointments/${id}/join`)
 
   const filteredAppointments =
     filter === 'All'

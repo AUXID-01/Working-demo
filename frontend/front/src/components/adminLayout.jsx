@@ -48,7 +48,7 @@ function AdminLayout({ title, subtitle, children }) {
       <aside className="sidebar">
         <div>
           <div className="logo">
-            <Link to="/admin-dashboard">
+            <Link to="/admin/dashboard">
               <img src={Logo} alt="Jeevia Logo" />
             </Link>
           </div>
@@ -60,58 +60,58 @@ function AdminLayout({ title, subtitle, children }) {
 
           <nav className="menu">
             <Link
-              to="/admin-dashboard"
+              to="/admin/dashboard"
               className={
-                location.pathname === '/admin-dashboard' ? 'active' : ''
+                location.pathname === '/admin/dashboard' ? 'active' : ''
               }
             >
               <FaChartLine /> Dashboard
             </Link>
             <Link
-              to="/admin-users"
-              className={location.pathname === '/admin-users' ? 'active' : ''}
+              to="/admin/users"
+              className={location.pathname === '/admin/users' ? 'active' : ''}
             >
               <FaUsers /> Users
             </Link>
             <Link
-              to="/admin-doctors"
-              className={location.pathname === '/admin-doctors' ? 'active' : ''}
+              to="/admin/doctors"
+              className={location.pathname === '/admin/doctors' ? 'active' : ''}
             >
               <FaUserMd /> Doctors
             </Link>
             <Link
-              to="/admin-patients"
+              to="/admin/patients"
               className={
-                location.pathname === '/admin-patients' ? 'active' : ''
+                location.pathname === '/admin/patients' ? 'active' : ''
               }
             >
               <FaUsers /> Patients
             </Link>
             <Link
-              to="/admin-records"
-              className={location.pathname === '/admin-records' ? 'active' : ''}
+              to="/admin/records"
+              className={location.pathname === '/admin/records' ? 'active' : ''}
             >
               <FaFileMedical /> Past Sessions
             </Link>
             <Link
-              to="/admin-messages"
+              to="/admin/messages"
               className={
-                location.pathname === '/admin-messages' ? 'active' : ''
+                location.pathname === '/admin/messages' ? 'active' : ''
               }
             >
               <FaEnvelope /> Messages
             </Link>
             <Link
-              to="/admin-payments"
+              to="/admin/payments"
               className={
-                location.pathname === '/admin-payments' ? 'active' : ''
+                location.pathname === '/admin/payments' ? 'active' : ''
               }
             >
               <FaCreditCard /> Payments
             </Link>
             <Link
-              to="/admin-reports"
-              className={location.pathname === '/admin-reports' ? 'active' : ''}
+              to="/admin/reports"
+              className={location.pathname === '/admin/reports' ? 'active' : ''}
             >
               <FaChartLine /> Reports
             </Link>
@@ -130,7 +130,7 @@ function AdminLayout({ title, subtitle, children }) {
         </div>
 
         {/* Profile Section */}
-        <Link to="/admin-profile" className="profile">
+        <Link to="/admin/profile" className="profile">
           <div className="avatar-circle">
             {admin?.name
               ? admin.name

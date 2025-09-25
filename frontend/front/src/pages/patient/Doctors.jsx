@@ -172,7 +172,7 @@ function Doctors() {
                   <button
                     className="btn book"
                     onClick={() =>
-                      navigate('/book-appointment', {
+                      navigate('/patient/book-appointment', {
                         state: {
                           doctor: doc.name,
                           specialty: doc.specialization,

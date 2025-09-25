@@ -21,11 +21,11 @@ const Profile = () => {
   }
 
   const handleEdit = () => {
-    navigate('/edit-profile')
+    navigate('/patient/edit-profile')
   }
 
   const handleBack = () => {
-    navigate('/dashboard')
+    navigate('/patient/dashboard')
   }
 
   return (

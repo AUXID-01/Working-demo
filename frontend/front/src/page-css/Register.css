@@ -361,3 +361,24 @@
   margin-bottom: 8px;
   color: #444;
 }
+
+.back-login-btn {
+  width: 200px;
+  padding: 10px;
+  margin-left: 0px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  background: #f9f9f9;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  left: 0%;
+}
+
+.back-login-btn:hover {
+  background: #eaeaea;
+  border-color: #bbb;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { use, useState } from 'react'
 import '../../page-css/Register.css'
 
 // React Icons
@@ -23,7 +23,9 @@ import AdminDetails from '../role-pages/adminDetails'
 function Register() {
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
-    fullName: '',
+    username: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -74,7 +76,9 @@ function Register() {
     e.preventDefault()
 
     if (
-      !formData.fullName ||
+      !formData.username ||
+      !formData.firstName ||
+      !formData.lastName ||
       !formData.email ||
       !formData.password ||
       !formData.confirmPassword
@@ -82,6 +86,7 @@ function Register() {
       setError('All fields are required')
       return
     }
+
 
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords don't match")
@@ -153,7 +158,7 @@ function Register() {
       }
 
       alert('Registration successful!')
-      window.location.href = '/dashboard'
+      window.location.href = '/patient/dashboard'
     } catch (err) {
       console.error(err)
       setError('Registration failed. Try again.')
@@ -162,6 +167,14 @@ function Register() {
 
   return (
     <div className="page-background">
+      <button
+        type="button"
+        className="back-login-btn"
+        onClick={() => (window.location.href = '/login')}
+      >
+        Back to Login
+      </button>
+
       <div className="register-container">
         <div className="register-card">
           <h2 className="register-title">Register</h2>
@@ -173,14 +186,40 @@ function Register() {
           <form onSubmit={step === 1 ? handleContinue : handleNext}>
             {step === 1 ? (
               <>
-                {/* Full Name */}
+                {/* Username */}
                 <div className="input-group">
                   <FaUser className="icon" />
                   <input
                     type="text"
-                    name="fullName"
-                    placeholder="Full Name"
-                    value={formData.fullName}
+                    name="username"
+                    placeholder="Username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                {/* First Name */}
+                <div className="input-group">
+                  <FaUser className="icon" />
+                  <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                {/* Last Name */}
+                <div className="input-group">
+                  <FaUser className="icon" />
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    value={formData.lastName}
                     onChange={handleChange}
                     required
                   />

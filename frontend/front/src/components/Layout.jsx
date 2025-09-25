@@ -50,7 +50,7 @@ function Layout({ title, subtitle, children }) {
       <aside className="sidebar">
         <div>
           <div className="logo">
-            <Link to="/dashboard">
+            <Link to="/patient/dashboard">
               <img src={Logo} alt="Jeevia Logo" />
             </Link>
           </div>
@@ -62,50 +62,50 @@ function Layout({ title, subtitle, children }) {
 
           <nav className="menu">
             <Link
-              to="/dashboard"
-              className={location.pathname === '/dashboard' ? 'active' : ''}
+              to="/patient/dashboard"
+              className={location.pathname === '/patient/dashboard' ? 'active' : ''}
             >
               <FaCalendarAlt /> Dashboard
             </Link>
             <Link
-              to="/appointments"
-              className={location.pathname === '/appointments' ? 'active' : ''}
+              to="/patient/appointments"
+              className={location.pathname === '/patient/appointments' ? 'active' : ''}
             >
               <FaCalendarCheck /> Appointments
             </Link>
             <Link
-              to="/doctors"
-              className={location.pathname === '/doctors' ? 'active' : ''}
+              to="/patient/doctors"
+              className={location.pathname === '/patient/doctors' ? 'active' : ''}
             >
               <FaUserMd /> Doctors
             </Link>
             <Link
-              to="/medicines"
-              className={location.pathname === '/medicines' ? 'active' : ''}
+              to="/patient/medicines"
+              className={location.pathname === '/patient/medicines' ? 'active' : ''}
             >
               <FaPills /> Medicines
             </Link>
             <Link
-              to="/records"
-              className={location.pathname === '/records' ? 'active' : ''}
+              to="/patient/records"
+              className={location.pathname === '/patient/records' ? 'active' : ''}
             >
               <FaFileMedical /> Records
             </Link>
             <Link
-              to="/reminders"
-              className={location.pathname === '/reminders' ? 'active' : ''}
+              to="/patient/reminders"
+              className={location.pathname === '/patient/reminders' ? 'active' : ''}
             >
               <FaBell /> Reminders
             </Link>
             <Link
-              to="/messages"
-              className={location.pathname === '/messages' ? 'active' : ''}
+              to="/patient/messages"
+              className={location.pathname === '/patient/messages' ? 'active' : ''}
             >
               <FaEnvelope /> Messages
             </Link>
             <Link
-              to="/payments"
-              className={location.pathname === '/payments' ? 'active' : ''}
+              to="/patient/payments"
+              className={location.pathname === '/patient/payments' ? 'active' : ''}
             >
               <FaCreditCard /> Payments
             </Link>
@@ -132,7 +132,7 @@ function Layout({ title, subtitle, children }) {
         </div>
 
         {/* Profile Section - clickable */}
-        <Link to="/profile" className="profile">
+        <Link to="/patient/profile" className="profile">
           <div className="avatar-circle">
             {user?.Username
               ? user.Username.split(' ')
