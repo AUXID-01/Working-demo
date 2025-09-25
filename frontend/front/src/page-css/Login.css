@@ -259,3 +259,23 @@ input::placeholder {
     font-size: 1rem;
   }
 }
+/* Remove autofill silver background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff00 inset !important; /* match input bg */
+  -webkit-text-fill-color: #000 !important; /* match text color */
+  border-radius: 20px; /* keep rounded look */
+  transition: background-color 5000s ease-in-out 0s; /* hack to suppress yellow */
+}
+
+/* Optional: style inputs generally */
+input {
+  background-color: #ffffff00;
+  color: #000;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 20px;
+}

@@ -31,9 +31,12 @@
   border: 1px solid #cce4e1;
 }
 
-.search-box .icon{
-  color: #000000;
+.search-box .icon {
+  color: #16685e;   /* same green tone as your theme */
+  font-size: 1rem;  /* force visible size */
+  flex-shrink: 0;   /* don’t let it shrink */
 }
+
 .search-box input {
   border: none;
   outline: none;

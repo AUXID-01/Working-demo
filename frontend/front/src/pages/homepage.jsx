@@ -1,5 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import Logo from '../assets/Logo.svg'
+
 
 const Home = () => {
   const navigate = useNavigate()
@@ -20,7 +22,7 @@ const Home = () => {
   }
 
   const styles = {
-    container: { maxWidth: '1200px', margin: '0 auto', padding: '0 20px' },
+    container: { maxWidth: '!00%', margin: '0 auto', padding: '0 20px' },
     header: {
       background: 'linear-gradient(135deg, #16685E 0%, #0d4c42 100%)',
       color: 'white',
@@ -153,14 +155,17 @@ const Home = () => {
   }
 
   return (
-    <div style={{ minHeight: '100vh', background: 'white' }}>
+    <div style={{ minHeight: '100vh', background: 'white', minWidth: '100vw' }}>
       {/* Header */}
       <header style={styles.header}>
         <div style={styles.container}>
           <div style={styles.headerContent}>
             <div style={styles.logo}>
-              <span style={styles.logoIcon}>🏥</span>
-              Rural Telemedicine Platform
+              <img
+                src={Logo}
+                alt="JEEVIA"
+                style={{ height: '40px', width: 'auto' }}
+              />
             </div>
             <div style={styles.authButtons}>
               <button

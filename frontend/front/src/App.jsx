@@ -89,9 +89,23 @@ function App() {
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/patient-details" element={<PatientDetails />} />
         <Route path="/admin-details" element={<AdminDetails />} />
-        <Route path="/doctor-professional-info" element={<DoctorProfessionalInfo />} />
-        <Route path="/doctor-practice-details" element={<DoctorPracticeDetails />} />
-        <Route path="/doctor-verification-docs" element={<DoctorVerificationDocs />} />
+        <Route path="/home" element={<Home />} />
+        <Route
+          path="/doctor-professional-info"
+          element={<DoctorProfessionalInfo />}
+        />
+        <Route
+          path="/doctor-practice-details"
+          element={<DoctorPracticeDetails />}
+        />
+        <Route
+          path="/doctor-verification-docs"
+          element={<DoctorVerificationDocs />}
+        />
+        <Route
+          path="/doctor-verification-docs"
+          element={<DoctorVerificationDocs />}
+        />
       </Routes>
     </Router>
   )

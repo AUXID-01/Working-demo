@@ -3,12 +3,15 @@ import '../../page-css/Login.css'
 import emailIcon from '../../assets/mark_email_unread.png'
 import lockIcon from '../../assets/Lock.png'
 import loginBg from '../../assets/signbg.svg'
+import { useNavigate } from 'react-router-dom'
+
 
 function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(null)
 
+  const navigate = useNavigate()  
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -34,16 +37,17 @@ function Login() {
 
       // Store token for authenticated routes
       localStorage.setItem('token', data.token)
+      localStorage.setItem('role', data.role) 
 
       // Role-based redirection
       // Assuming your backend sends `role` in the response
       const role = data.role // 'admin', 'doctor', 'patient'
       if (role === 'admin') {
-        window.location.href = '/admin-dashboard'
+        navigate('/admin-dashboard')
       } else if (role === 'doctor') {
-        window.location.href = '/doc-dashboard'
+        navigate('/doc-dashboard')
       } else if (role === 'patient') {
-        window.location.href = '/dashboard'
+        navigate('/dashboard')
       } else {
         setError('Invalid role assigned.')
       }
