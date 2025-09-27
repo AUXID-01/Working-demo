@@ -2,10 +2,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import asyncHandler from "../utils/asyncHandler.js";
 import User from "../models/user.model.js";
-import Patient from "../models/patient.model.js";
+import Admin from "../models/admin.model.js";
 
-// Register patient
-export const registerPatient = asyncHandler(async (req, res) => {
+// Register admin
+export const registerAdmin = asyncHandler(async (req, res) => {
   const {
     username,
     email,
@@ -14,21 +14,26 @@ export const registerPatient = asyncHandler(async (req, res) => {
     lastName,
     dateOfBirth,
     phoneNumber,
-    gender,
-    address,
-    emergencyContact,
-    medicalHistory,
-    bloodGroup,
+    employeeId,
+    adminRole,
+    organizationName,
+    contactNumber,
   } = req.body;
+
+  // Validate enum values explicitly before saving
+  const validAdminRoles = ["SuperAdmin", "SubAdmin"]; // define exact valid roles here
+  if (!validAdminRoles.includes(adminRole)) {
+    return res.status(400).json({ message: "Invalid adminRole value" });
+  }
 
   if (
     !username ||
     !email ||
     !password ||
-    !gender ||
-    !address ||
-    !emergencyContact ||
-    !bloodGroup
+    !employeeId ||
+    !adminRole ||
+    !organizationName ||
+    !contactNumber
   )
     return res.status(400).json({ message: "Required fields missing" });
 
@@ -47,16 +52,15 @@ export const registerPatient = asyncHandler(async (req, res) => {
     lastName,
     dateOfBirth,
     phoneNumber,
-    role: "patient",
+    role: "admin",
   });
 
-  const patient = await Patient.create({
+  const admin = await Admin.create({
     user: user._id,
-    gender,
-    address,
-    emergencyContact,
-    medicalHistory,
-    bloodGroup,
+    employeeId,
+    adminRole,
+    organizationName,
+    contactNumber,
   });
 
   const payload = { id: user._id, role: user.role };
@@ -64,15 +68,15 @@ export const registerPatient = asyncHandler(async (req, res) => {
 
   res
     .status(201)
-    .json({ message: "Patient registered successfully", token, user, patient });
+    .json({ message: "Admin registered successfully", token, user, admin });
 });
 
-// Get patient profile
-export const getPatientProfile = asyncHandler(async (req, res) => {
-  const patient = await Patient.findOne({ user: req.user.id }).populate(
+// Get admin profile
+export const getAdminProfile = asyncHandler(async (req, res) => {
+  const admin = await Admin.findOne({ user: req.user.id }).populate(
     "user",
     "-password"
   );
-  if (!patient) return res.status(404).json({ message: "Patient not found" });
-  res.json(patient);
+  if (!admin) return res.status(404).json({ message: "Admin not found" });
+  res.json(admin);
 });
