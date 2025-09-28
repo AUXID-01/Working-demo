@@ -63,6 +63,7 @@ function Login() {
         backgroundImage: `url(${loginBg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
         minHeight: '100vh',
       }}
     >

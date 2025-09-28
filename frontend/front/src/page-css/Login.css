@@ -1,17 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
+body {
+  margin: 0;
+  background: url("your-background.png") no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;  /* Fix width: no horizontal scroll */
+}
+
 .login-container {
+  min-height: 100vh;   /* starts at full height, grows if needed */
+  width: 100%;         /* fix width */
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;   
-  width: 100vw; 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   padding: 2rem;
   box-sizing: border-box;
 }
+
+
 
 /* Left side */
 .login-left {

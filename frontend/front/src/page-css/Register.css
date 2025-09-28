@@ -52,15 +52,13 @@
   background: #fff;
   border-radius: 20px;
   padding: 2.5rem;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 50px;
-}
-
-.register-card{
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
   transition: all 0.5s ease;
+  border-radius: 50px;
 }
+
+
 
 /* Title */
 .register-title {
@@ -365,13 +363,12 @@
 .back-login-btn {
   width: 200px;
   padding: 10px;
-  margin-left: 0px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  margin-left: 20px;
+  border-radius:15px;
   font-size: 15px;
   font-weight: 500;
-  background: #f9f9f9;
-  color: #333;
+  background: #00695c;
+  color: #fff;
   cursor: pointer;
   transition: all 0.3s ease;
   position: absolute;
@@ -379,6 +376,7 @@
 }
 
 .back-login-btn:hover {
-  background: #eaeaea;
-  border-color: #bbb;
+  background: #0B463F;
+  box-shadow: 0 4px 12px rgba(11, 70, 63, 0.3);
+  transform: translateY(-2px);
 }
