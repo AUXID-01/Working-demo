@@ -13,14 +13,13 @@ function DoctorProfessionalInfo({ formData, onChange }) {
       <div className="input-group">
         <FaIdBadge className="icon" />
         <input
-          type="text"
-          name="medicalRegNumber"
-          placeholder="Medical Registration Number"
-          aria-label="Medical Registration Number"
-          value={formData.medicalRegNumber}
-          onChange={onChange}
-          required
-        />
+  type="text"
+  name="registrationNumber" // updated
+  placeholder="Medical Registration Number"
+  value={formData.registrationNumber}
+  onChange={onChange}
+  required
+/>
       </div>
 
       {/* Specialization */}

@@ -1,5 +1,5 @@
-import React, { use, useState } from 'react'
-import '../../page-css/Register.css'
+import React, { useState } from 'react';
+import '../../page-css/Register.css';
 
 // React Icons
 import {
@@ -11,17 +11,17 @@ import {
   FaEyeSlash,
   FaEnvelope,
   FaBriefcase,
-} from 'react-icons/fa'
+} from 'react-icons/fa';
 
 // Role-specific forms
-import PatientDetails from '../role-pages/patientDetails'
-import DoctorProfessionalInfo from '../role-pages/DoctorProfessionalInfo'
-import DoctorVerificationDocs from '../role-pages/DoctorVerificationDocs'
-import DoctorPracticeDetails from '../role-pages/DoctorPracticeDetails'
-import AdminDetails from '../role-pages/adminDetails'
+import PatientDetails from '../role-pages/patientDetails';
+import DoctorProfessionalInfo from '../role-pages/DoctorProfessionalInfo';
+import DoctorVerificationDocs from '../role-pages/DoctorVerificationDocs';
+import DoctorPracticeDetails from '../role-pages/DoctorPracticeDetails';
+import AdminDetails from '../role-pages/adminDetails';
 
 function Register() {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     username: '',
     firstName: '',
@@ -31,7 +31,7 @@ function Register() {
     confirmPassword: '',
     phoneNumber: '',
     dateOfBirth: '',
-    role: 'patient', // occupation
+    role: 'patient',
 
     // Patient
     gender: '',
@@ -41,40 +41,40 @@ function Register() {
     medicalHistory: '',
 
     // Doctor
+    registrationNumber: '',
     specialization: '',
-    licenseNumber: '',
     experienceYears: '',
     qualifications: '',
-    clinicName: '',
+    hospitalName: '',
     clinicAddress: '',
+    consultationTimings: '',
     consultationFee: '',
+    degreeCertificate: null,
+    idProof: null,
 
     // Admin
     employeeId: '',
     adminRole: '',
     organization: '',
     contactDetails: '',
-  })
+  });
 
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [error, setError] = useState(null)
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Input handler
   const handleChange = (e) => {
-    const { name, value, files, type } = e.target
-    // support file inputs (if used in doctor docs components)
+    const { name, value, files, type } = e.target;
     if (type === 'file') {
-      setFormData({ ...formData, [name]: files })
+      setFormData({ ...formData, [name]: files });
     } else {
-      setFormData({ ...formData, [name]: value })
+      setFormData({ ...formData, [name]: value });
     }
-  }
+    setError(null);
+  };
 
-  // Step 1: Frontend validation only
   const handleContinue = (e) => {
-    e.preventDefault()
-
+    e.preventDefault();
     if (
       !formData.username ||
       !formData.firstName ||
@@ -83,87 +83,132 @@ function Register() {
       !formData.password ||
       !formData.confirmPassword
     ) {
-      setError('All fields are required')
-      return
+      setError('All fields are required');
+      return;
     }
-
-
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords don't match")
-      return
+      setError("Passwords don't match");
+      return;
     }
+    setError(null);
+    setStep(2);
+  };
 
-    setError(null)
-
-    // both doctor and other roles go to step 2, but doctors will continue to step 3 & 4
-    setStep(2)
-  }
-
-  // Move Next (or submit on final step)
   const handleNext = async (e) => {
-    e.preventDefault()
-    setError(null)
+    e.preventDefault();
+    setError(null);
 
-    // Doctor has multi-step flow (steps 2,3,4)
+    // Doctor multi-step
     if (formData.role === 'doctor') {
       if (step < 4) {
-        setStep((s) => s + 1)
-        return
+        setStep((s) => s + 1);
+        return;
       } else {
-        // step === 4 -> final submit
-        await handleRegister(e)
-        return
+        await handleRegister(e);
+        return;
       }
     }
 
-    // Patient/Admin: single step (step 2) -> final submit
-    await handleRegister(e)
-  }
+    // Patient/Admin submit
+    await handleRegister(e);
+  };
 
-  // Back navigation
   const handleBack = (e) => {
-    e.preventDefault()
-    setError(null)
-    // if on step 2 and you want to go back to step 1
-    if (step > 1) setStep((s) => s - 1)
-  }
+    e.preventDefault();
+    setError(null);
+    if (step > 1) setStep((s) => s - 1);
+  };
 
-  // Final submission to backend
   const handleRegister = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    setError(null);
 
+    // Doctor registration with FormData for files
+    if (formData.role === 'doctor') {
+      try {
+        const formPayload = new FormData();
+
+        // Common fields
+        formPayload.append('username', formData.username);
+        formPayload.append('firstName', formData.firstName);
+        formPayload.append('lastName', formData.lastName);
+        formPayload.append('email', formData.email);
+        formPayload.append('password', formData.password);
+        formPayload.append('phoneNumber', formData.phoneNumber);
+        formPayload.append(
+          'dateOfBirth',
+          formData.dateOfBirth
+            ? new Date(formData.dateOfBirth).toISOString().split('T')[0]
+            : ''
+        );
+        formPayload.append('role', formData.role);
+
+        // Doctor-specific
+        formPayload.append('registrationNumber', formData.registrationNumber);
+        formPayload.append('specialization', formData.specialization);
+        formPayload.append('experienceYears', formData.experienceYears);
+        formPayload.append('qualifications', formData.qualifications);
+        formPayload.append('hospitalName', formData.hospitalName);
+        formPayload.append('clinicAddress', formData.clinicAddress);
+        formPayload.append('consultationTimings', formData.consultationTimings);
+        formPayload.append('consultationFee', formData.consultationFee);
+
+        // File uploads
+        if (formData.degreeCertificate?.length > 0) {
+          formPayload.append('degreeCertificate', formData.degreeCertificate[0]);
+        }
+        if (formData.idProof?.length > 0) {
+          formPayload.append('idProof', formData.idProof[0]);
+        }
+
+        const response = await fetch('http://localhost:5000/api/doctor/register', {
+          method: 'POST',
+          body: formPayload,
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Registration failed');
+
+        alert('Registration successful!');
+        window.location.href = '/doctor/dashboard';
+      } catch (err) {
+        console.error(err);
+        setError(err.message || 'Registration failed. Try again.');
+      }
+      return;
+    }
+
+    // Patient/Admin registration
     const formattedFormData = {
       ...formData,
       dateOfBirth: formData.dateOfBirth
         ? new Date(formData.dateOfBirth).toISOString().split('T')[0]
         : null,
-    }
+    };
+
+    const url =
+      formData.role === 'admin'
+        ? 'http://localhost:5000/api/admin/register'
+        : 'http://localhost:5000/api/patient/register';
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formattedFormData),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || 'Registration failed');
 
-      if (!response.ok) {
-        if (data.errors) {
-          setError(data.errors[0].msg)
-        } else {
-          setError(data.message || 'Registration failed')
-        }
-        return
-      }
-
-      alert('Registration successful!')
-      window.location.href = '/patient/dashboard'
+      alert('Registration successful!');
+      window.location.href =
+        formData.role === 'admin' ? '/admin/dashboard' : '/patient/dashboard';
     } catch (err) {
-      console.error(err)
-      setError('Registration failed. Try again.')
+      console.error(err);
+      setError(err.message || 'Registration failed. Try again.');
     }
-  }
+  };
 
   return (
     <div className="page-background">
@@ -182,10 +227,10 @@ function Register() {
             {step === 1 ? 'Create your account' : 'Enter your details'}
           </p>
 
-          {/* IMPORTANT: onSubmit is step 1 -> handleContinue, otherwise handleNext */}
           <form onSubmit={step === 1 ? handleContinue : handleNext}>
             {step === 1 ? (
               <>
+                {/* Step 1 fields */}
                 {/* Username */}
                 <div className="input-group">
                   <FaUser className="icon" />
@@ -198,7 +243,6 @@ function Register() {
                     required
                   />
                 </div>
-
                 {/* First Name */}
                 <div className="input-group">
                   <FaUser className="icon" />
@@ -211,7 +255,6 @@ function Register() {
                     required
                   />
                 </div>
-
                 {/* Last Name */}
                 <div className="input-group">
                   <FaUser className="icon" />
@@ -224,7 +267,6 @@ function Register() {
                     required
                   />
                 </div>
-
                 {/* Email */}
                 <div className="input-group">
                   <FaEnvelope className="icon" />
@@ -237,7 +279,6 @@ function Register() {
                     required
                   />
                 </div>
-
                 {/* Password */}
                 <div className="input-group password-group">
                   <FaLock className="icon" />
@@ -261,7 +302,6 @@ function Register() {
                     />
                   )}
                 </div>
-
                 {/* Confirm Password */}
                 <div className="input-group password-group">
                   <FaLock className="icon" />
@@ -276,21 +316,16 @@ function Register() {
                   {showConfirmPassword ? (
                     <FaEye
                       className="eye-icon"
-                      onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
-                      }
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     />
                   ) : (
                     <FaEyeSlash
                       className="eye-icon"
-                      onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
-                      }
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     />
                   )}
                 </div>
-
-                {/* Phone Number */}
+                {/* Phone */}
                 <div className="input-group phone-icon">
                   <FaPhone className="icon" />
                   <input
@@ -302,8 +337,7 @@ function Register() {
                     required
                   />
                 </div>
-
-                {/* Date of Birth */}
+                {/* DOB */}
                 <div className="input-group">
                   <FaCalendarAlt className="icon" />
                   <input
@@ -314,7 +348,6 @@ function Register() {
                     required
                   />
                 </div>
-
                 {/* Role */}
                 <div className="input-group">
                   <FaBriefcase className="icon" />
@@ -338,19 +371,13 @@ function Register() {
               </>
             ) : (
               <>
-                {/* Role-specific details */}
-                {/* Patient & Admin are single-step after step 1.
-                    Doctor has multi-step pages (2,3,4). */}
-
+                {/* Step 2+ role-specific */}
                 {formData.role === 'patient' && step === 2 && (
                   <PatientDetails formData={formData} onChange={handleChange} />
                 )}
-
                 {formData.role === 'admin' && step === 2 && (
                   <AdminDetails formData={formData} onChange={handleChange} />
                 )}
-
-                {/* Doctor multi-step */}
                 {formData.role === 'doctor' && step === 2 && (
                   <DoctorProfessionalInfo
                     formData={formData}
@@ -372,29 +399,16 @@ function Register() {
 
                 {error && <p className="error-text">{error}</p>}
 
-                {/* Buttons: Back + Submit/Next (Submit triggers handleNext which either moves to next or calls handleRegister) */}
-                <div
-                  style={{ display: 'flex', gap: '12px', marginTop: '12px' }}
-                >
+                <div style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
                   <button
                     type="button"
                     className="btn-register"
                     onClick={handleBack}
-                    style={{
-                      background: '#eee',
-                      color: '#222',
-                      flex: '0 0 120px',
-                    }}
+                    style={{ background: '#eee', color: '#222', flex: '0 0 120px' }}
                   >
                     Back
                   </button>
-
-                  <button
-                    type="submit"
-                    className="btn-register"
-                    style={{ flex: 1 }}
-                  >
-                    {/* For doctor show Next until last page */}
+                  <button type="submit" className="btn-register" style={{ flex: 1 }}>
                     {formData.role === 'doctor'
                       ? step < 4
                         ? 'Next'
@@ -408,7 +422,7 @@ function Register() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Register
+export default Register;

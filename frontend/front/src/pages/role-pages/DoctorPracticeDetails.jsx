@@ -11,16 +11,15 @@ function DoctorPracticeDetails({ formData, onChange }) {
     <>
       {/* Hospital/Clinic Name */}
       <div className="input-group">
-        <FaHospital className="icon" />
         <input
-          type="text"
-          name="clinicName"
-          placeholder="Hospital/Clinic Name"
-          aria-label="Hospital/Clinic Name"
-          value={formData.clinicName}
-          onChange={onChange}
-          required
-        />
+  type="text"
+  name="hospitalName" // updated
+  placeholder="Hospital/Clinic Name"
+  value={formData.hospitalName}
+  onChange={onChange}
+  required
+/>
+
       </div>
 
       {/* Clinic Address */}

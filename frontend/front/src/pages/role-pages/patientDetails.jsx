@@ -17,13 +17,12 @@ function PatientDetails({ formData, onChange }) {
           name="gender"
           value={formData.gender}
           onChange={onChange}
-          aria-label="Gender"
           required
         >
           <option value="">-- Select Gender --</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
         </select>
       </div>
 
@@ -31,9 +30,8 @@ function PatientDetails({ formData, onChange }) {
       <div className="input-group">
         <FaMapMarkerAlt className="icon" />
         <textarea
-          name="fullAddress"
+          name="address"
           placeholder="Enter your full address (House no, Street, City, State, PIN)"
-          aria-label="Full Address"
           value={formData.fullAddress}
           onChange={onChange}
           rows="3"
@@ -48,7 +46,6 @@ function PatientDetails({ formData, onChange }) {
           type="tel"
           name="emergencyContact"
           placeholder="Emergency Contact (10 digits)"
-          aria-label="Emergency Contact"
           value={formData.emergencyContact}
           onChange={onChange}
           pattern="[0-9]{10}"
@@ -62,7 +59,6 @@ function PatientDetails({ formData, onChange }) {
         <textarea
           name="medicalHistory"
           placeholder="Medical History (optional)"
-          aria-label="Medical History"
           value={formData.medicalHistory}
           onChange={onChange}
           rows="3"
@@ -76,7 +72,6 @@ function PatientDetails({ formData, onChange }) {
           name="bloodGroup"
           value={formData.bloodGroup}
           onChange={onChange}
-          aria-label="Blood Group"
           required
         >
           <option value="">-- Select Blood Group --</option>
